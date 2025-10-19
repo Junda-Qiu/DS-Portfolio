@@ -77,8 +77,8 @@ This project constructs a full analytical framework to uncover insights across t
 High CTR ads concentrate among young-to-middle-age groups, suggesting strong creative resonance.  
 Low CTR ads, despite exposure, lack contextual relevance or visual appeal.
 
-<img width="640" height="480" alt="ad_top10_age" src="https://github.com/user-attachments/assets/0c4b48d6-4da1-4f2b-98f7-f2231e2087cd" />
-<img width="640" height="480" alt="ad_bottom10_age" src="https://github.com/user-attachments/assets/f5d58d1f-4902-4120-9835-67d8e44f8f0c" />
+<img width="500" height="300" alt="ad_top10_age" src="https://github.com/user-attachments/assets/0c4b48d6-4da1-4f2b-98f7-f2231e2087cd" />
+<img width="500" height="300" alt="ad_bottom10_age" src="https://github.com/user-attachments/assets/f5d58d1f-4902-4120-9835-67d8e44f8f0c" />
 <img width="500" height="300" alt="clicked_price" src="https://github.com/user-attachments/assets/5208f828-92bc-4798-a202-c81ed269a419" />
 
 
