@@ -56,8 +56,8 @@ This project constructs a full analytical framework to uncover insights across t
 | 6401–12800 | 4.38 | 2.86 |
 | 12801+ | 5.13 | 1.23 |
 
-<img width="1000" height="600" alt="ctr_by_pricebin" src="https://github.com/user-attachments/assets/1c78c650-0052-4248-a25d-ff26f0e1a9a3" />
-<img width="1000" height="600" alt="usershare_by_pricebin" src="https://github.com/user-attachments/assets/106fb0eb-6547-4ba4-9a05-1d1b576296a3" />
+<img width="500" height="300" alt="ctr_by_pricebin" src="https://github.com/user-attachments/assets/1c78c650-0052-4248-a25d-ff26f0e1a9a3" />
+<img width="500" height="300" alt="usershare_by_pricebin" src="https://github.com/user-attachments/assets/106fb0eb-6547-4ba4-9a05-1d1b576296a3" />
 
 
 **Insights:**  
@@ -76,6 +76,11 @@ This project constructs a full analytical framework to uncover insights across t
 
 High CTR ads concentrate among young-to-middle-age groups, suggesting strong creative resonance.  
 Low CTR ads, despite exposure, lack contextual relevance or visual appeal.
+
+<img width="640" height="480" alt="ad_top10_age" src="https://github.com/user-attachments/assets/0c4b48d6-4da1-4f2b-98f7-f2231e2087cd" />
+<img width="640" height="480" alt="ad_bottom10_age" src="https://github.com/user-attachments/assets/f5d58d1f-4902-4120-9835-67d8e44f8f0c" />
+<img width="500" height="300" alt="clicked_price" src="https://github.com/user-attachments/assets/5208f828-92bc-4798-a202-c81ed269a419" />
+
 
 **Takeaways:**  
 1. Replicate top CTR creative patterns.  
@@ -97,6 +102,7 @@ Low CTR ads, despite exposure, lack contextual relevance or visual appeal.
 | Potential Users | 4.0 | High | Mid | Personalized recommendations |
 | Premium Users | 4.6 | High | High | VIP tier programs |
 | Stable Users | 1.5 | Mid | Mid | Light-touch engagement |
+<img width="640" height="480" alt="rfmcluster_age" src="https://github.com/user-attachments/assets/2657e10e-0de3-4b00-bc40-4e815d800e8b" />
 
 **Key Insight:** RFM reveals clear value hierarchy—top 10% users contribute most CTR.  
 **Operational Focus:** Balance between reactivation (churned) and nurturing (potential).
@@ -114,6 +120,7 @@ Low CTR ads, despite exposure, lack contextual relevance or visual appeal.
 | C2 | 2.0 | High-price, low frequency | "Brand Seekers" |
 | C3 | 3.2 | High CTR, frequent | "Active Engagers" |
 | C4 | 6.6 | High spend, high CTR | "High-Value Elites" |
+<img width="640" height="480" alt="cluster_age" src="https://github.com/user-attachments/assets/2399e743-4e09-4779-b5e7-c79bda583c4f" />
 
 **Recommendation:** Tailor campaigns per cluster — C3/C4 as top ROI groups, C0 as reactivation focus.
 
@@ -128,6 +135,7 @@ Low CTR ads, despite exposure, lack contextual relevance or visual appeal.
 | 7-Day | 2.46 |
 | 14-Day | 0.00 |
 | 30-Day | 0.00 |
+<img width="600" height="300" alt="cohort_retention_heatmap" src="https://github.com/user-attachments/assets/08f8ca26-dc06-4482-bbf6-d1c70976514e" />
 
 **Interpretation:** Retention drops steeply after day 7, reflecting lack of post-click engagement.  
 **Action Plan:** Implement automated push cycles at D+1 / D+3 / D+7 intervals.
@@ -137,6 +145,7 @@ Low CTR ads, despite exposure, lack contextual relevance or visual appeal.
 ## 8. Price Sensitivity: Equal-Width vs Quantile Binning  
 
 📊 **Figure:** `price_ctr_equalwidth.png`
+<img width="500" height="300" alt="price_ctr_equalwidth" src="https://github.com/user-attachments/assets/5d92b0ae-6926-4d24-9ffd-35767c6b2792" />
 
 Equal-width binning skews CTR toward low bands due to outliers.  
 Quantile-based bins yield a more realistic representation of click behavior.
