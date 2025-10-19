@@ -102,7 +102,7 @@ Low CTR ads, despite exposure, lack contextual relevance or visual appeal.
 | Potential Users | 4.0 | High | Mid | Personalized recommendations |
 | Premium Users | 4.6 | High | High | VIP tier programs |
 | Stable Users | 1.5 | Mid | Mid | Light-touch engagement |
-<img width="640" height="480" alt="rfmcluster_age" src="https://github.com/user-attachments/assets/2657e10e-0de3-4b00-bc40-4e815d800e8b" />
+<img width="500" height="300" alt="rfmcluster_age" src="https://github.com/user-attachments/assets/2657e10e-0de3-4b00-bc40-4e815d800e8b" />
 
 **Key Insight:** RFM reveals clear value hierarchy—top 10% users contribute most CTR.  
 **Operational Focus:** Balance between reactivation (churned) and nurturing (potential).
@@ -120,7 +120,7 @@ Low CTR ads, despite exposure, lack contextual relevance or visual appeal.
 | C2 | 2.0 | High-price, low frequency | "Brand Seekers" |
 | C3 | 3.2 | High CTR, frequent | "Active Engagers" |
 | C4 | 6.6 | High spend, high CTR | "High-Value Elites" |
-<img width="640" height="480" alt="cluster_age" src="https://github.com/user-attachments/assets/2399e743-4e09-4779-b5e7-c79bda583c4f" />
+<img width="500" height="300" alt="cluster_age" src="https://github.com/user-attachments/assets/2399e743-4e09-4779-b5e7-c79bda583c4f" />
 
 **Recommendation:** Tailor campaigns per cluster — C3/C4 as top ROI groups, C0 as reactivation focus.
 
