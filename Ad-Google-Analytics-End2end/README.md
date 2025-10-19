@@ -56,6 +56,10 @@ This project constructs a full analytical framework to uncover insights across t
 | 6401–12800 | 4.38 | 2.86 |
 | 12801+ | 5.13 | 1.23 |
 
+<img width="1000" height="600" alt="ctr_by_pricebin" src="https://github.com/user-attachments/assets/1c78c650-0052-4248-a25d-ff26f0e1a9a3" />
+<img width="1000" height="600" alt="usershare_by_pricebin" src="https://github.com/user-attachments/assets/106fb0eb-6547-4ba4-9a05-1d1b576296a3" />
+
+
 **Insights:**  
 - CTR peaks in the low-price band (0–100) at **5.49%**, dominating user volume.  
 - High-priced goods (>12,801) show a rebound, indicating **brand-driven clicks**.  
