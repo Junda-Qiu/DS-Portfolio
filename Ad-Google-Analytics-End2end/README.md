@@ -223,6 +223,8 @@
 ---
 
 ## **3.4 RFM 模型分析**
+<img width="500" height="300" alt="rfm_age" src="https://github.com/user-attachments/assets/f6987808-5275-437c-8513-2a22dad2b09d" />
+<img width="500" height="300" alt="rfm_gender" src="https://github.com/user-attachments/assets/e4e6f17e-6308-4c81-990f-e08e9e2a249f" />
 
 RFM 模型用于描述用户的生命周期价值结构（图 `rfm_age.png`, `rfm_gender.png`）。
 基于中位数阈值分组后可得以下结果：
