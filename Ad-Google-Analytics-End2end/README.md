@@ -164,6 +164,9 @@
 * **低价带（0–200）**：CTR 约 5.5%，远高于全局均值（约 3.2%），显示价格可达性效应；
 * **中价带（201–1600）**：CTR 降至约 2.4%，说明用户兴趣集中于极低或极高价带；
 * **高价带（1601+）**：CTR 在 12801 以上区间出现回升，呈“探索性点击”特征。
+  
+<img width="500" height="300" alt="price_ctr_quantile" src="https://github.com/user-attachments/assets/1709da1d-97c2-41d5-ae65-19e9c6160a27" />
+<img width="500" height="300" alt="price_ctr_equalwidth" src="https://github.com/user-attachments/assets/5a9137b4-26ad-4fee-a8d6-5c94bdcc5e1b" />
 
 进一步利用 `price_ctr_equalwidth.png` 与 `price_ctr_quantile.png` 对比发现：
 
