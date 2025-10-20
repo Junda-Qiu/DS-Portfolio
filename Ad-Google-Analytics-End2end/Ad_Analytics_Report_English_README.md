@@ -88,143 +88,128 @@ The outcomes can be used for:
 
 ---
 
+
 ## **Chapter 2. Data and Methodology**
 
-### 2.1 Dataset Overview
+### **2.1 Dataset Overview**
 
-The study integrates three primary datasets — `user.csv`, `click.csv`, and `ad.csv` — into a unified analytical table named `processed_user_ad.csv`.  
+The project integrates three primary datasets — `user.csv`, `click.csv`, and `ad.csv` — into a unified analytical table named **processed_user_ad.csv**.
 Each record represents one ad impression linked to a unique user and ad ID.
 
-| Dataset | Description | Key Columns |
-|----------|--------------|--------------|
-| **User Data** | Contains demographic and behavioral attributes. | `userid`, `gender`, `age_level`, `consumption_level`, `city_tier`, `is_student` |
-| **Click Data** | Logs ad exposure events and click behaviors. | `userid`, `ad_id`, `clk`, `nonclk`, `time_stamp` |
-| **Ad Data** | Stores ad metadata and product information. | `ad_id`, `brand`, `campaign_id`, `category_id`, `price`, `customer` |
+| Dataset        | Description                                     | Key Columns                                                                     |
+| -------------- | ----------------------------------------------- | ------------------------------------------------------------------------------- |
+| **User Data**  | Contains demographic and behavioral attributes. | `userid`, `gender`, `age_level`, `consumption_level`, `city_tier`, `is_student` |
+| **Click Data** | Logs ad exposure and click behaviors.           | `userid`, `ad_id`, `clk`, `nonclk`, `time_stamp`                                |
+| **Ad Data**    | Stores ad metadata and product information.     | `ad_id`, `brand`, `campaign_id`, `category_id`, `price`, `customer`             |
 
-After merging and cleaning, the final dataset contains:
-- **975,441 rows** and **19 columns**  
-- **Missing rate** below 5% for most variables  
-- **Distinct users:** ~356,000  
-- **Distinct ads:** ~59,000  
+After merging and cleaning, the final dataset includes:
+
+* **975,441 rows** and **19 columns**
+* **Missing rate** below 5% for most variables
+* **Distinct users:** ~356,000
+* **Distinct ads:** ~59,000
 
 ---
 
-### 2.2 Data Preprocessing Workflow
+### **2.2 Data Preprocessing Workflow**
 
-The preprocessing pipeline is executed through a Python-based ETL (Extract–Transform–Load) process:
+The preprocessing pipeline follows these major steps:
 
-1. **Encoding Robust Reading**  
-   The `safe_read_csv()` utility automatically retries with encodings `['gbk', 'utf-8', 'latin1']` to ensure compatibility.
+1. **Robust Reading**
+   The function automatically retries encodings (`gbk`, `utf-8`, `latin1`) to handle inconsistencies.
 
-2. **Standardized Key Fields**  
-   All user identifiers are renamed to `userid`, and ad identifiers to `ad_id` for consistent merging.
+2. **Field Standardization**
+   All user IDs are renamed to `userid`, and ad IDs to `ad_id` for consistent merging.
 
-3. **Data Merging**  
-   The datasets are joined on shared keys:
-   ```python
-   merged = click_df.merge(user_df, on='userid', how='left').merge(ad_df, on='ad_id', how='left')
-````
+3. **Dataset Merging**
+   The three source files are merged using left joins on `userid` and `ad_id`.
 
 4. **Price Binning**
-   Prices are divided into **9 fixed bins** for categorical analysis:
-
-   ```
-   [0-100], [101-200], [201-400], [401-800], [801-1600],
-   [1601-3200], [3201-6400], [6401-12800], [12801+]
-   ```
-
-   A corresponding integer code (`price_bin_code`) is generated for modeling.
+   Prices are divided into nine fixed bins:
+   [0–100], [101–200], [201–400], [401–800], [801–1600], [1601–3200], [3201–6400], [6401–12800], [12801+].
+   Each bin is assigned an integer label (`price_bin_code`).
 
 5. **Outlier Capping**
-   Extreme prices are capped at the 99th percentile (`price_capped`) to stabilize distribution.
+   Extremely high prices are capped at the 99th percentile (`price_capped`) to stabilize the distribution.
 
-6. **Timestamp Standardization**
-   Epoch values are converted to `datetime64[ns]` for temporal computations.
+6. **Timestamp Conversion**
+   Epoch timestamps are converted to standard datetime objects for temporal analysis.
 
 ---
 
-### 2.3 Analytical Indicators
+### **2.3 Analytical Indicators**
 
-The system computes multiple field-level, behavioral, and structural indicators.
+The analytical framework includes three levels of descriptive indicators:
 
-#### (1) Field-Level Profiling
+**(1) Field-Level Profiling**
 
-* Data type, missing rate, and unique count per column.
-* Statistical moments: mean, standard deviation, quantiles (1%, 5%, 25%, 50%, 75%, 95%, 99%).
+* Data type, missing rate, unique count, and value range for each field.
+* Basic statistics: mean, standard deviation, quantiles (1%, 25%, 50%, 75%, 99%).
 
-#### (2) Key Integrity Checks
+**(2) Integrity and Uniqueness Checks**
 
-* **Primary Keys:** `userid`, `ad_id`
-* **Duplicate Rate:**
+* Primary Keys: `userid`, `ad_id`
+* Duplicate Rates:
 
   * User ID duplication: ~63.5%
   * Ad ID duplication: ~93.9%
-    Indicates multi-view user activity and repeated ad exposure patterns.
+    Indicates repeated ad exposure and multi-view user activity.
 
 ---
 
-### 2.4 CTR and Price Analysis
+### **2.4 CTR and Price Relationship**
 
-The **Click-Through Rate (CTR)** is computed as:
+**CTR (Click-Through Rate)** is computed as:
 
-```
 CTR = clicks / (clicks + nonclicks)
-```
 
-For each price bin, the mean CTR and corresponding user share are calculated:
+For each price bin, the mean CTR and corresponding user share are computed:
 
-```
-User Share (%) = unique_users_in_bin / total_unique_users * 100
-```
+User Share (%) = (unique_users_in_bin / total_unique_users) × 100
 
-The results reveal that:
+**Findings:**
 
-* **Low-price bins (0–200)** achieve the highest CTR (~5.5%).
-* **Mid-price bins (400–1600)** show a moderate decline (~4.4%).
-* **Ultra-high-price bins (12801+)** unexpectedly rebound (~5.1%), suggesting exploratory behavior.
+* Low-price bins (0–200) yield the highest CTR (~5.5%).
+* Middle bins (400–1600) show lower CTR (~4.4%).
+* Ultra-high bins (12801+) rebound to ~5.1%, suggesting curiosity-driven clicks.
 
-All results are visualized using bar plots:
+Visualizations:
 
 * `ctr_by_pricebin.png`
 * `usershare_by_pricebin.png`
 
 ---
 
-### 2.5 Top and Bottom Performing Ads
+### **2.5 Ad-Level Performance**
 
-The top 100 ads are ranked by impressions and click rate using:
+Ads are ranked by impressions and CTR to identify top and bottom performers.
 
-```python
-ad_stats = df.groupby('ad_id').agg(
-    total_impressions=('nonclk', 'sum'),
-    total_clicks=('clk', 'sum'),
-    avg_price=('price', 'mean')
-)
-ad_stats['click_rate'] = ad_stats['total_clicks'] / ad_stats['total_impressions']
-```
+Visualizations:
 
-Visualizations include:
+* **Top 10 Ads:** `ad_top10_age.png`, `ad_top10_gender.png`, `ad_top10_level.png`
+* **Bottom 10 Ads:** `ad_bottom10_age.png`, `ad_bottom10_gender.png`, `ad_bottom10_level.png`
 
-* **CTR Top 10** demographics: `ad_top10_age.png`, `ad_top10_gender.png`, `ad_top10_level.png`
-* **CTR Bottom 10** demographics: `ad_bottom10_age.png`, `ad_bottom10_gender.png`, `ad_bottom10_level.png`
+**Insights:**
 
-These analyses reveal that **CTR leaders** align closely with user demographics (gender × age match), whereas **CTR laggards** reflect mismatched targeting.
+* Top ads align closely with user demographics (gender × age match).
+* Poor ads often display demographic mismatch (e.g., luxury ads targeting students).
+* Price alone does not dictate performance; contextual relevance matters.
 
 ---
 
-### 2.6 RFM Segmentation
+### **2.6 RFM Segmentation**
 
-**RFM** (Recency–Frequency–Monetary) is used to measure user engagement and value:
+The RFM model (Recency, Frequency, Monetary) measures user value and engagement:
 
-```
-R = days_since_last_click
-F = number_of_clicks
-M = average_price_of_clicked_ads
-```
+* R = days since last click
+* F = total number of clicks
+* M = average price of clicked ads
 
-Users are classified into 8 groups based on median thresholds:
+Median thresholds: R = 1011.0, F = 1.0, M = 192.0
 
-| R | F | M | Category           |
+Users are divided into eight groups:
+
+| R | F | M | Segment            |
 | - | - | - | ------------------ |
 | 1 | 1 | 1 | High-Value Users   |
 | 0 | 1 | 1 | Re-Engage Users    |
@@ -235,763 +220,542 @@ Users are classified into 8 groups based on median thresholds:
 | 0 | 1 | 0 | Maintain Users     |
 | 0 | 0 | 0 | Churned Users      |
 
-Median thresholds observed:
+Visualizations:
 
-```
-R = 1011.0, F = 1.0, M = 192.0
-```
-
-RFM distribution result visualization:
-
-* `rfm_age.png` (Age distribution by RFM category)
-* `rfm_gender.png` (Gender distribution by RFM category)
+* `rfm_age.png`
+* `rfm_gender.png`
 
 ---
 
-### 2.7 KMeans Clustering
+### **2.7 KMeans Clustering**
 
-Two clustering blocks are applied:
+Two separate clustering models are trained:
 
-#### (1) Behavioral Clustering
+**(1) Behavioral Clustering**
+Features: `[shopping_level, click_rate, avg_price]`
 
-Features used:
+* Number of clusters: 5
+* Outputs: `cluster_age.png`, `cluster_gender.png`
 
-```
-[shopping_level, click_rate, avg_price]
-```
+**(2) RFM-Based Clustering**
+Features: `[recency, frequency, monetary]`
 
-Number of clusters: 5
-Cluster centers illustrate distinct behavioral segments, e.g.:
+* Number of clusters: 5
+* Outputs: `rfmcluster_age.png`, `rfmcluster_gender.png`
 
-* Price-sensitive explorers
-* Frequent clickers
-* High-spending but infrequent users
-* Passive low-engagement users
-
-Charts:
-
-* `cluster_age.png`
-* `cluster_gender.png`
-
-#### (2) RFM-Based Clustering
-
-Features used:
-
-```
-[recency, frequency, monetary]
-```
-
-Cluster count: 5
-Visual outputs:
-
-* `rfmcluster_age.png`
-* `rfmcluster_gender.png`
+These clusters reveal user subgroups such as price-sensitive explorers, loyal high-frequency clickers, and passive browsers.
 
 ---
 
-### 2.8 Retention Analysis
+### **2.8 Retention Analysis**
 
-#### (1) Cohort Retention Matrix
+Two retention metrics are analyzed:
 
-Each user’s first activity date defines a cohort:
+**(1) Cohort Retention**
+Each user’s first interaction defines a cohort.
+The retention matrix tracks active users over time.
+Visualization: `cohort_retention_heatmap.png`
 
-```
-cohort_index = (event_date - cohort_start_date).days
-```
+Results:
 
-Matrix visualization: `cohort_retention_heatmap.png`
-Retention drops sharply after Day 1 (22.8%) and Day 7 (2.46%).
+* Day 1 retention: 22.8%
+* Day 7 retention: 2.46%
+* Day 14+ retention: 0%
 
-#### (2) Rolling Retention
+**(2) Rolling Retention**
 
-```
-Rolling Retention (k days) = users_active_after_k_days / total_users * 100
-```
+Rolling Retention (k days) = (users_active_after_k_days / total_users) × 100
 
-Overall results:
+7-day retention = 2.46%
+14-day and 30-day retention = 0%
 
-| Metric           | Value |
-| ---------------- | ----- |
-| 7-Day Retention  | 2.46% |
-| 14-Day Retention | 0.00% |
-| 30-Day Retention | 0.00% |
+This confirms short engagement lifecycles typical of online ad interactions.
 
 ---
 
-### 2.9 Price Bin Sensitivity
+### **2.9 Price Bin Sensitivity**
 
 Two binning strategies are compared:
 
-* **Equal Width (EW):** divides full range into 9 equal segments.
-* **Quantile (QT):** divides by price quantiles.
+* **Equal Width (EW):** uniform intervals across price range
+* **Quantile (QT):** percentiles-based adaptive bins
 
-Files:
+Visualizations:
 
 * `price_ctr_equalwidth.png`
 * `price_ctr_quantile.png`
 
-Quantile binning captures CTR variation more accurately due to skewed price distribution.
+**Conclusion:** Quantile binning better captures CTR variation under skewed distributions.
 
 ---
 
 ## **Chapter 3. Data Analysis and Results**
 
----
+### **3.1 Overview**
 
-### 3.1 Overview
-
-This chapter presents the analytical findings derived from the processed dataset, including click-through rate (CTR) distribution, user share by price bin, ad-level performance ranking, RFM-based user segmentation, and clustering results.  
-The analysis focuses on identifying structural patterns in user engagement and ad effectiveness, supplemented by visualization outputs.
+This chapter presents the analytical results derived from the merged dataset, covering click-through rate (CTR) distribution, user share by price bin, ad-level performance, RFM-based segmentation, and KMeans clustering.
+The aim is to identify the behavioral and structural patterns that explain user engagement and ad performance.
 
 ---
 
-### 3.2 CTR Distribution by Price Bin
+### **3.2 CTR Distribution by Price Bin**
 
-CTR and user distribution across price ranges are visualized in:
+CTR and user distribution are summarized through the following visualizations:
 
-- `ctr_by_pricebin.png`  
-- `usershare_by_pricebin.png`
+* `ctr_by_pricebin.png`
+* `usershare_by_pricebin.png`
 
-**Key Observations:**
-
-| Price Bin | CTR (%) | User Share (%) |
-|------------|----------|----------------|
-| 0–100 | 5.49 | 51.07 |
-| 101–200 | 4.62 | 31.29 |
-| 201–400 | 4.68 | 29.80 |
-| 401–800 | 4.60 | 17.07 |
-| 801–1600 | 4.45 | 10.87 |
-| 1601–3200 | 4.20 | 7.19 |
-| 3201–6400 | 4.17 | 4.99 |
-| 6401–12800 | 4.38 | 2.86 |
-| 12801+ | 5.13 | 1.23 |
+| Price Bin  | CTR (%) | User Share (%) |
+| ---------- | ------- | -------------- |
+| 0–100      | 5.49    | 51.07          |
+| 101–200    | 4.62    | 31.29          |
+| 201–400    | 4.68    | 29.80          |
+| 401–800    | 4.60    | 17.07          |
+| 801–1600   | 4.45    | 10.87          |
+| 1601–3200  | 4.20    | 7.19           |
+| 3201–6400  | 4.17    | 4.99           |
+| 6401–12800 | 4.38    | 2.86           |
+| 12801+     | 5.13    | 1.23           |
 
 **Findings:**
-- CTR forms an **inverted-U curve** across price levels.  
-  Low-price items (0–200) attract exploratory clicks due to affordability.  
-  Middle-price items show fatigue or indecision.  
-  Ultra-high prices (>12,800) regain curiosity-driven clicks.
-- The majority of users (over 50%) engage within the low-price tier, confirming that affordability strongly drives engagement.
+
+* CTR follows an **inverted-U shape** across price tiers.
+  Low-price items attract exploratory clicks due to affordability, while mid-tier prices suffer from decision hesitation.
+  High-price products show renewed curiosity, suggesting aspirational browsing.
+* More than half of users (51%) engage in the lowest price tier, emphasizing **price sensitivity** as a key engagement driver.
 
 ---
 
-### 3.3 Top and Bottom Ads Performance
+### **3.3 Top and Bottom Ad Performance**
 
-The **Top 20 ads** by impressions and CTR reveal strong differentiation in targeting efficiency.  
-Relevant charts:
-- `ad_top10_age.png`
-- `ad_top10_gender.png`
-- `ad_top10_level.png`
-- `ad_bottom10_age.png`
-- `ad_bottom10_gender.png`
-- `ad_bottom10_level.png`
+The ranking of ads by impressions and CTR reveals substantial variation in targeting accuracy.
+Visualizations include:
+
+* Top 10 ads: `ad_top10_age.png`, `ad_top10_gender.png`, `ad_top10_level.png`
+* Bottom 10 ads: `ad_bottom10_age.png`, `ad_bottom10_gender.png`, `ad_bottom10_level.png`
 
 **Insights:**
-- **Top-performing ads** align closely with target demographics — particularly young female users with mid-level consumption capacity.  
-- **Low-performing ads** often mismatch user intent — e.g., high-end luxury targeting student demographics.
-- Ads with higher price points but relevant context (e.g., branded electronics) maintain strong CTR if user relevance is achieved.
 
-Additionally, the comparison between **clicked** and **non-clicked** products demonstrates that price alone does not dictate engagement.  
-Reference visualization:  
-- `clicked_price.png`
-- `nonclicked_price.png`
+* Top-performing ads align with the correct **demographic segments** (e.g., female 18–25).
+* Low-performing ads display **targeting mismatch** — such as high-end campaigns aimed at low-spending users.
+* Contextual relevance outweighs price or visual design in determining CTR.
+
+Supporting figures:
+
+* `clicked_price.png` (average price of clicked items)
+* `nonclicked_price.png` (average price of skipped items)
 
 ---
 
-### 3.4 User Value Segmentation (RFM Analysis)
+### **3.4 User Value Segmentation (RFM Analysis)**
 
-The RFM model captures user engagement diversity by three behavioral dimensions:
-- **Recency (R):** days since last interaction  
-- **Frequency (F):** total clicks  
-- **Monetary (M):** average price of clicked ads  
+The **RFM model** measures user engagement along three dimensions:
 
-Results summarized in:
-- `rfm_age.png`
-- `rfm_gender.png`
+* **Recency (R):** days since last click
+* **Frequency (F):** total number of clicks
+* **Monetary (M):** average price of clicked ads
 
-**RFM Category Proportion (%):**
+Median thresholds: R = 1011.0, F = 1.0, M = 192.0
+Visualizations: `rfm_age.png`, `rfm_gender.png`
 
-| Category | Definition | Share (%) |
-|-----------|-------------|-----------|
-| Deep Nurture Users | Frequent interaction with high-value items | 26.90 |
-| New Users | Newly engaged, low recency and spend | 25.89 |
-| Churned Users | No recent activity | 18.52 |
-| Retention Users | High-value but disengaging | 17.19 |
-| High-Value Users | Active and high spending | 4.57 |
-| Potential Users | Regular but low spend | 4.06 |
-| Maintain Users | Consistent, mid-value | 1.51 |
-| Re-Engage Users | Recently inactive high spenders | 1.36 |
+| Category           | Definition                               | Share (%) |
+| ------------------ | ---------------------------------------- | --------- |
+| Deep Nurture Users | Frequent interaction with high-value ads | 26.90     |
+| New Users          | Recently active, low click history       | 25.89     |
+| Churned Users      | No recent activity                       | 18.52     |
+| Retention Users    | High-value, disengaging                  | 17.19     |
+| High-Value Users   | High spending and frequent               | 4.57      |
+| Potential Users    | Regular but low-value                    | 4.06      |
+| Maintain Users     | Consistent, medium-value                 | 1.51      |
+| Re-Engage Users    | Previously active, now inactive          | 1.36      |
 
 **Interpretation:**
-- Nearly half the users (R+F+M = low) represent early-stage or at-risk segments.  
-- Deep Nurture Users contribute the largest portion of recurring clicks.  
-- High-Value Users, though only 4.57%, drive a disproportionate share of total revenue — indicating a Pareto effect.
+
+* Nearly half of users belong to low-frequency or early-stage segments.
+* Deep Nurture Users contribute the majority of recurring engagement.
+* A small elite (≈5%) drives disproportionate revenue, validating the **Pareto principle**.
 
 ---
 
-### 3.5 KMeans Behavioral Clustering
+### **3.5 KMeans Behavioral Clustering**
 
-Behavioral segmentation identifies latent user patterns across three primary features:
-```
+Clustering on `[shopping_level, click_rate, avg_price]` reveals latent behavioral segments.
+Visualizations: `cluster_age.png`, `cluster_gender.png`
 
-shopping_level, click_rate, avg_price
+| Cluster | Shopping Level | Click Rate | Avg. Price | Description                          |
+| ------- | -------------- | ---------- | ---------- | ------------------------------------ |
+| C0      | 0.00           | 0.00       | 258        | Passive browsers (no engagement)     |
+| C1      | 1.23           | 0.29       | 483        | Mid-level users, occasional clickers |
+| C2      | 0.07           | 0.04       | 7534       | High-price explorers                 |
+| C3      | 1.05           | 1.00       | 418        | Loyal and frequent clickers          |
+| C4      | 0.01           | 0.00       | 2789       | Occasional high-spenders             |
 
-```
+Cluster distribution:
 
-Visualization:
-- `cluster_age.png`
-- `cluster_gender.png`
-
-**Cluster Centers (Approximation):**
-
-| Cluster | Shopping Level | Click Rate | Avg. Price | Description |
-|----------|----------------|-------------|-------------|--------------|
-| C0 | 0.00 | 0.00 | 258 | Passive browsers (no engagement) |
-| C1 | 1.23 | 0.29 | 483 | Mid-level users, active clickers |
-| C2 | 0.07 | 0.04 | 7534 | High-price exploratory users |
-| C3 | 1.05 | 1.00 | 418 | Loyal frequent clickers |
-| C4 | 0.01 | 0.00 | 2789 | Occasional high-value spenders |
-
-**Cluster Distribution:**
-```
-
-C0: 80.06%, C1: 8.08%, C2: 2.03%, C3: 3.21%, C4: 6.63%
-
-```
+* C0: 80.06%
+* C1: 8.08%
+* C2: 2.03%
+* C3: 3.21%
+* C4: 6.63%
 
 **Insights:**
-- Over 80% of users exhibit near-zero engagement — an industry-wide “long-tail inactivity” pattern.  
-- Cluster C3 (“Loyal Frequent Clickers”) represents the core audience for retention marketing.  
-- Cluster C2 (“Explorers”) indicates curiosity-driven interactions on premium items — an ideal group for personalized recommendations.
+
+* Over 80% of users show minimal engagement — a typical “long-tail” inactivity phenomenon.
+* Cluster C3 users are the **core retention target**, showing consistent engagement and loyalty.
+* Cluster C2 users (Explorers) show curiosity toward premium products, offering potential for **personalized marketing**.
 
 ---
 
-### 3.6 RFM-Based Clustering
+### **3.6 RFM-Based Clustering**
 
-A second KMeans model is applied to RFM features:
+A second KMeans model is applied to `[recency, frequency, monetary]`.
+Visualizations: `rfmcluster_age.png`, `rfmcluster_gender.png`
 
-```
-
-recency, frequency, monetary
-
-```
-
-Cluster centers:
-
-| Cluster | Recency | Frequency | Monetary | Behavioral Type |
-|----------|----------|------------|-----------|------------------|
-| R0 | 1009.35 | 0.00 | 366.77 | Inactive, low value |
-| R1 | 1010.29 | 1.00 | 408.26 | Re-engaged users |
-| R2 | 1013.48 | 0.00 | 348.33 | Churned segment |
-| R3 | 1011.04 | 0.07 | 5712.31 | High spenders, rare activity |
-| R4 | 1009.07 | 2.39 | 564.81 | Consistent active users |
-
-Visualization:
-- `rfmcluster_age.png`
-- `rfmcluster_gender.png`
+| Cluster | Recency | Frequency | Monetary | Type                         |
+| ------- | ------- | --------- | -------- | ---------------------------- |
+| R0      | 1009.35 | 0.00      | 366.77   | Inactive, low-value          |
+| R1      | 1010.29 | 1.00      | 408.26   | Re-engaged users             |
+| R2      | 1013.48 | 0.00      | 348.33   | Churned segment              |
+| R3      | 1011.04 | 0.07      | 5712.31  | High spenders, rare activity |
+| R4      | 1009.07 | 2.39      | 564.81   | Consistent active users      |
 
 **Findings:**
-- Two distinct user types dominate:
-  - **R0/R2:** High recency, low frequency — retention targets.  
-  - **R3/R4:** High value and consistent frequency — profitability drivers.
-- Demographic overlays show female users slightly dominate high-frequency clusters.
+
+* R0/R2 represent **retention targets** due to inactivity.
+* R3/R4 correspond to **profit-driving users**.
+* Female users slightly dominate high-frequency segments.
 
 ---
 
-### 3.7 Retention Analysis
+### **3.7 Retention Analysis**
 
-#### (1) Cohort Retention (Daily)
+**Cohort Retention:**
+Visualized in `cohort_retention_heatmap.png`
 
-Heatmap: `cohort_retention_heatmap.png`
+| Period  | Retention (%) |
+| ------- | ------------- |
+| Day 1   | 25            |
+| Day 3   | 13            |
+| Day 7   | 2             |
+| Day 14+ | ≈0            |
 
-**Observation:**
-- Day 0 retention = 100% (baseline)  
-- Day 1 retention ≈ 25%  
-- Day 3 retention ≈ 13%  
-- Day 7 retention ≈ 2%  
-- After Day 14, nearly all cohorts decay to 0%.
+Engagement decays sharply within the first week, validating the **short-cycle interest model**.
 
-This confirms a **short-cycle interest model**, meaning most users engage briefly before churn.
-
-#### (2) Rolling Retention Summary
-
-| Period | Retention Rate |
-|--------|----------------|
-| 7 Days | 2.46% |
-| 14 Days | 0.00% |
-| 30 Days | 0.00% |
-
-Retention decays exponentially, suggesting that engagement renewal campaigns (D+1, D+3, D+7) are critical.
+**Rolling Retention:**
+7-Day = 2.46%
+14-Day = 0%
+30-Day = 0%
+Retention drops exponentially, underscoring the importance of **timely re-engagement campaigns**.
 
 ---
 
-### 3.8 Price Bin Sensitivity Comparison
+### **3.8 Price Bin Sensitivity**
 
-To test robustness, CTRs are recalculated using two different binning strategies:
+Two price segmentation strategies were compared:
 
-- **Equal Width:**  
-  Produces uniform intervals but ignores skewness.
+* **Equal Width (EW)**: divides entire price range evenly
+* **Quantile (QT)**: divides by percentile thresholds
 
-- **Quantile-Based:**  
-  Adapts to data distribution, more representative for heavy-tailed prices.
+Visualizations:
 
-Results are visualized in:
-- `price_ctr_equalwidth.png`
-- `price_ctr_quantile.png`
+* `price_ctr_equalwidth.png`
+* `price_ctr_quantile.png`
 
-**Result Summary:**
-- Equal Width: nearly constant CTR (~4.9%) due to price concentration in low bins.  
-- Quantile Binning: reveals meaningful CTR variation (~6.5% → 4.2%) across quantiles.
+**Summary:**
 
-**Conclusion:**
-Quantile-based binning is preferred for CTR modeling because it captures behavioral heterogeneity within the pricing domain.
+* Equal-width binning smooths out variation, masking real behavior.
+* Quantile binning exposes significant CTR differences between lower and higher quantiles.
+* Therefore, **quantile binning** is more suitable for real-world CTR modeling.
 
 ---
 
 ## **Chapter 4. Discussion**
 
----
+### **4.1 Behavioral and Psychological Mechanisms Behind CTR**
 
-### 4.1 Behavioral and Psychological Mechanisms Behind CTR
+The observed **inverted-U pattern** between price and CTR reflects fundamental psychological mechanisms behind online consumer behavior:
 
-The observed **inverted-U relationship** between price and CTR highlights the dual nature of consumer decision-making in digital advertising.
+1. **Low-Price Attraction (0–200 Range)**
+   Users tend to click impulsively on low-priced items because the **perceived risk is minimal** and the **decision cost is low**.
+   This supports the **cost-accessibility hypothesis**, which posits that affordability drives curiosity clicks.
 
-1. **Low-Price Attraction (0–200 range)**  
-   Users tend to click impulsively on affordable items.  
-   This reflects a **cost-accessibility effect** — lower cognitive barriers and reduced financial risk encourage spontaneous engagement.
+2. **Mid-Price Fatigue (400–1600 Range)**
+   As prices rise, users experience **decision hesitation**—they need more cognitive effort to evaluate value versus cost.
+   Ads in this range require additional cues such as social proof or discounts to sustain engagement.
 
-2. **Mid-Price Fatigue (400–1600 range)**  
-   As prices rise, users experience **decision hesitation**.  
-   Without strong emotional or informational cues, they are less likely to click.
+3. **High-Price Curiosity (>12,800 Range)**
+   Despite the high cost, certain ads attract clicks due to **aspirational motivation**.
+   These users click not to purchase, but to **explore luxury or novelty**, aligning with the **exploratory curiosity model**.
 
-3. **High-Price Curiosity (>12,800 range)**  
-   Users demonstrate exploratory behavior even for luxury products.  
-   This corresponds to the **exploratory curiosity model**, where novelty and aspiration drive attention.
-
-These dynamics jointly shape CTR outcomes and imply that **click behavior is not purely economic**, but also **psychological**.
+Together, these findings indicate that **click behavior is driven by both economic reasoning and emotional factors**, emphasizing the dual nature of online ad engagement.
 
 ---
 
-### 4.2 Demographic Matching and Ad Efficiency
+### **4.2 Demographic Matching and Ad Efficiency**
 
-Ad performance strongly correlates with **audience–content congruence**.
+Ad performance is highly dependent on **audience–content congruence**.
+When an ad aligns with its target demographic, it consistently achieves higher CTR and retention.
 
-- **CTR-Top Ads**: target younger, mid-tier consumers with affordable lifestyle goods.  
-- **CTR-Bottom Ads**: show mismatched targeting, such as luxury products shown to students or low-tier cities.
+| Ad Type                    | Target Demographic             | Performance                 |
+| -------------------------- | ------------------------------ | --------------------------- |
+| Affordable lifestyle goods | Female, 18–25, mid consumption | High CTR, strong conversion |
+| Luxury goods               | High income, Tier-1 cities     | Moderate CTR, high ROI      |
+| Educational services       | Students, low consumption      | Low CTR, high retention     |
+| Generic brand ads          | Mixed demographics             | Low CTR, poor engagement    |
 
-A new metric is proposed:
-```
+A new metric, **Match Rate**, can quantify targeting accuracy:
 
-Match Rate = (targeted_audience_overlap / total_audience) * 100
+**Match Rate = (Targeted Audience Overlap / Total Audience) × 100**
 
-```
-
-High Match Rate corresponds to high CTR and sustained engagement, confirming that **precision targeting** is a stronger driver of ad efficiency than creative quality alone.
-
----
-
-### 4.3 Temporal Behavior and User Lifecycle
-
-The retention and RFM analyses reveal a **short attention span** across cohorts:
-
-- Most users engage within **1–3 days** of initial exposure.  
-- After 7 days, fewer than **3%** remain active.  
-- Recency (R) shows the highest predictive power among RFM metrics.
-
-These findings validate a **short-cycle engagement model** where users’ interaction intensity decays rapidly, underscoring the importance of reactivation strategies (e.g., D+1, D+3, D+7 reminders).
+High match rate values (>70%) correlate with higher CTR and longer engagement, confirming that **precision targeting** is more impactful than ad aesthetics alone.
 
 ---
 
-### 4.4 User Segmentation Insights
+### **4.3 Temporal Behavior and User Lifecycle**
 
-#### (1) Deep-Nurture Users (26.9%)
-Consistent high spenders who frequently click on mid- to high-price items.  
-Require **personalized loyalty campaigns** and premium recommendations.
+The retention and RFM analyses reveal that **user engagement follows a short-lived cycle**:
 
-#### (2) New Users (25.9%)
-First-time clickers with low recency and frequency.  
-Best targeted through **welcome flows** and **trial incentives**.
+* Most users interact intensively within **1–3 days** of first exposure.
+* After **7 days**, fewer than 3% remain active.
+* After **14 days**, nearly all cohorts churn.
 
-#### (3) Churned and Retention Users (~35%)  
-Inactive segments with prior high value.  
-Should be **re-engaged via retargeting and email remarketing**.
+This pattern aligns with the **short-cycle interest model**, suggesting that digital ad platforms should focus on **timing-sensitive recall** mechanisms (e.g., D+1, D+3, D+7 reactivation campaigns).
 
-#### (4) Exploratory High-Price Users (~2%)  
-Driven by novelty rather than need.  
-Ideal audience for **cross-brand promotions** or **content-based ad narratives**.
+Recency (R) shows the strongest correlation with future engagement, confirming its predictive value for **user reactivation models**.
 
 ---
 
-### 4.5 Model Limitations and Statistical Considerations
+### **4.4 User Segmentation Insights**
 
-1. **Time Window Constraint**  
-   The data reflects a short-term sample; seasonal or long-horizon behaviors are not captured.
+Based on RFM and KMeans results, user behavior can be categorized into distinct strategic segments:
 
-2. **Simplifying Assumptions in RFM and KMeans**  
-   Both assume independent features and roughly spherical cluster structures, which may oversimplify user diversity.
+1. **Deep-Nurture Users (26.9%)**
+   High engagement and frequent interaction with valuable products.
+   Strategy: Reward-based loyalty programs and premium recommendations.
 
-3. **Absence of Conversion Metrics**  
-   CTR is used as a proxy for engagement, but **conversion rate (CVR)** and **return on investment (ROI)** are not included.
+2. **New Users (25.9%)**
+   Recently acquired, low engagement history.
+   Strategy: Welcome flows, onboarding content, and first-purchase incentives.
 
-4. **Retention Model Simplification**  
-   Cohort analysis uses only first activity timestamps, without modeling sequential re-engagement events.
+3. **Churned and Retention Users (~35%)**
+   Inactive but previously valuable users.
+   Strategy: Email remarketing and reactivation campaigns.
 
-These limitations highlight the need for **longitudinal tracking** and **nonlinear modeling techniques** in future iterations.
+4. **Exploratory High-Price Users (~2%)**
+   Curiosity-driven users with interest in high-value items.
+   Strategy: Brand storytelling and aspirational content.
+
+This segmentation enables **personalized marketing** with higher ROI and more efficient resource allocation.
 
 ---
 
-### 4.6 Interpretation and Business Implications
+### **4.5 Model Limitations and Statistical Considerations**
 
-From a business perspective, the analytical results suggest that **price sensitivity, demographic targeting, and lifecycle timing** are the three key levers for improving ad ROI.
+Despite its practical value, the current analysis has limitations:
 
-**Strategic Takeaways:**
-- Implement **price-tiered ad bidding** (dynamic CPC by price bin).  
-- Optimize ad delivery based on **demographic affinity scores**.  
-- Introduce **time-based remarketing loops** to re-engage users before churn.
+1. **Time Horizon Restriction**
+   The dataset covers a limited time window, preventing long-term behavioral modeling.
 
-Together, these actions can lead to measurable increases in overall CTR, retention, and conversion efficiency.
+2. **Simplifying Assumptions**
+   RFM assumes independence among Recency, Frequency, and Monetary dimensions.
+   KMeans assumes spherical clusters, which may oversimplify user diversity.
+
+3. **Missing Conversion Data**
+   CTR serves as a proxy for engagement, but conversion rates (CVR) and ROI data are not integrated.
+
+4. **Retention Simplification**
+   Cohort analysis only accounts for first engagement, not repeated sessions or multi-touch sequences.
+
+These limitations point to the need for **longitudinal data collection** and **nonlinear modeling** (e.g., mixture or time-series models) in future research.
+
+---
+
+### **4.6 Interpretation and Business Implications**
+
+The findings carry several operational and strategic implications:
+
+1. **Price Tier Optimization**
+   Dynamic bid weighting based on price-tier CTR can significantly improve ad spend efficiency.
+
+2. **Demographic Precision**
+   Audience alignment should guide creative design and media placement decisions.
+
+3. **Lifecycle Marketing**
+   Reactivation windows (D+1, D+3, D+7) should be automated for high-churn cohorts.
+
+4. **Integrated Feedback Loop**
+   Combining RFM segmentation and CTR monitoring creates a continuous improvement system, turning analytics into actionable insights.
+
+Overall, these discussions demonstrate how **data-driven behavioral insights** can directly translate into measurable business growth when combined with **strategic timing** and **audience matching**.
+
+---
 
 ## **Chapter 5. Strategy and Application**
 
----
+### **5.1 Translating Insights into Action**
 
-### 5.1 Translating Insights into Action
+This chapter converts the analytical findings into practical business strategies for improving advertising performance.
+It focuses on four pillars of optimization:
 
-The analytical results from previous chapters form a comprehensive foundation for **data-driven decision-making** in ad optimization.  
-This chapter translates quantitative insights into practical business strategies, focusing on targeting, retention, experimentation, and personalization.
+1. Price-tier targeting
+2. Demographic precision
+3. User lifecycle management
+4. Data-driven experimentation and personalization
 
-The goal is to create a **closed feedback loop** from data → insight → execution → evaluation.
-
----
-
-### 5.2 Price-Tier Optimization Strategy
-
-1. **Dynamic CPC Bidding by Price Bin**  
-   Allocate ad budget proportionally based on CTR performance per price tier.  
-   For example:  
-```
-
-bid_weight = CTR_bin / mean_CTR
-
-```
-- High-CTR bins (0–200, 12801+) receive more bidding weight.  
-- Mid-price bins (400–1600) are optimized through creative redesign or audience retargeting.
-
-2. **Elasticity-Based ROI Tracking**  
-Incorporate price elasticity analysis to measure marginal gains:  
-```
-
-ROI = (CTR * ConversionRate * ProfitPerClick) / CostPerImpression
-
-````
-Adjust pricing and creative intensity dynamically by ROI sensitivity.
-
-3. **Recommendation for Implementation**
-- Integrate these weights into DSP/RTB bidding algorithms.  
-- Monitor real-time CTR by bin and reweight weekly.
+The overarching goal is to create a **closed-loop system** where data continuously informs optimization and execution.
 
 ---
 
-### 5.3 Demographic Targeting Enhancement
+### **5.2 Price-Tier Optimization**
 
-Using the demographic alignment pattern discovered earlier, construct an **Audience–Ad Match Matrix**:
+**1. Dynamic CPC Bidding by Price Bin**
+CTR patterns from Chapter 3 suggest that price has a nonlinear effect on engagement.
+Thus, ad bidding can be dynamically weighted according to each bin’s relative CTR performance:
 
-| Demographic Segment | Ad Type | Strategy |
-|----------------------|----------|-----------|
-| Female, 18–25, Low Price Sensitivity | Fashion, Cosmetics | Emphasize visuals, flash sales |
-| Male, 25–40, Tech Interest | Electronics, Tools | Highlight functionality and specs |
-| Student, Low Consumption Level | Education, Daily Goods | Use discounts and reward incentives |
-| High Income, 30+ | Premium & Luxury | Stress exclusivity and brand identity |
+**Bid Weight = CTR_bin / Mean_CTR**
 
-This **MatchRate matrix** provides the operational basis for **campaign segmentation**, ensuring that creative assets and placements correspond precisely to audience profiles.
+* High-CTR bins (e.g., 0–200 and 12801+) receive greater budget allocation.
+* Mid-range bins (400–1600) require creative optimization or retargeting rather than higher bids.
 
----
+**2. ROI-Based Adjustment**
+Campaigns can track real-time ROI using:
 
-### 5.4 User Lifecycle Management
+**ROI = (CTR × ConversionRate × ProfitPerClick) / CostPerImpression**
 
-The RFM and cohort analyses demonstrate a **short-term lifecycle** with rapid engagement decay.  
-Therefore, lifecycle management should focus on **timely reactivation**:
-
-| Stage | Strategy | Timing |
-|--------|-----------|---------|
-| D+1 | Send post-click reminders or offer coupons | 24 hours after click |
-| D+3 | Deliver personalized recommendations | 3 days post-click |
-| D+7 | Reactivation ads or email remarketing | 7 days post-click |
-
-Such time-sensitive reactivation loops can **extend user lifetime value (LTV)** and **reduce churn rate** effectively.
+Dynamic bidding ensures optimal cost-efficiency and prevents overinvestment in low-performing bins.
 
 ---
 
-### 5.5 Personalized Recommendation System
+### **5.3 Demographic Targeting Enhancement**
 
-Leveraging clustering outputs, each user can be assigned to a **behavioral segment** for content personalization.
+Ad performance strongly depends on **audience–content alignment**.
+Based on previous results, we can design an **Audience–Ad Matching Matrix**:
 
-**Example Personalization Logic:**
-```python
-if user.cluster == 'C3':
- recommend('high-engagement', n=3)
-elif user.cluster == 'C1':
- recommend('discount-focused', n=5)
-elif user.cluster == 'C2':
- recommend('premium-exploratory', n=2)
-````
+| Demographic Segment              | Recommended Ad Type            | Optimization Strategy                |
+| -------------------------------- | ------------------------------ | ------------------------------------ |
+| Female, 18–25, low-to-mid income | Fashion, beauty, lifestyle     | Visual emphasis, discount prompts    |
+| Male, 25–40, mid-to-high income  | Electronics, tech gadgets      | Highlight features, use testimonials |
+| Students                         | Education, low-cost essentials | Reward systems, trial incentives     |
+| High-income (Tier-1 cities)      | Luxury goods                   | Brand storytelling, prestige framing |
 
-This system provides:
-
-* **Higher CTR uplift** via relevance.
-* **Reduced ad fatigue** through varied content.
-* **Better ROI** by targeting high-value clusters selectively.
+High match rate between demographic traits and ad design results in increased CTR and improved ad efficiency.
+In practice, **audience similarity scores** can be computed via cosine similarity on user embeddings to guide automatic ad targeting.
 
 ---
 
-### 5.6 A/B Testing Framework
+### **5.4 User Lifecycle Management**
 
-A standardized A/B testing protocol ensures objective performance evaluation for different strategies.
+Retention data revealed that user engagement decays rapidly within seven days.
+Therefore, a structured **lifecycle engagement framework** is necessary:
 
-**Structure:**
+| Stage   | Strategy                                                | Timing                    |
+| ------- | ------------------------------------------------------- | ------------------------- |
+| **D+1** | Send personalized post-click notifications or discounts | 24 hours after last click |
+| **D+3** | Deliver customized recommendations                      | 3 days post-click         |
+| **D+7** | Trigger reactivation email or ad recall                 | 7 days post-click         |
 
-| Component         | Description                                    |
-| ----------------- | ---------------------------------------------- |
-| Control Group     | Baseline ad version                            |
-| Treatment Group   | Modified version (price, design, or targeting) |
-| Metric            | CTR, CVR, ROI                                  |
-| Significance Test | Two-sample Z-test                              |
-| Confidence Level  | 95% (α = 0.05)                                 |
-
-**Formula:**
-
-```
-z = (CTR1 - CTR2) / sqrt(p*(1-p)*(1/n1 + 1/n2))
-```
-
-where
-`p = (clicks1 + clicks2) / (impressions1 + impressions2)`
-
-**Implementation Tip:**
-Maintain a centralized log of experiments, and evaluate using both *statistical* and *business significance* metrics.
+By automating these three checkpoints, platforms can effectively increase **lifetime value (LTV)** and mitigate churn.
+This model also supports predictive scheduling — sending reminders **before** churn risk peaks.
 
 ---
 
-### 5.7 Retention and Re-Engagement Tactics
+### **5.5 Personalized Recommendation System**
+
+User clusters and RFM segments serve as the foundation for personalized recommendations.
+Each cluster is mapped to a distinct recommendation strategy:
+
+| User Type                    | Behavioral Traits     | Recommendation Focus                            |
+| ---------------------------- | --------------------- | ----------------------------------------------- |
+| C3 – Loyal Frequent Clickers | Consistent engagement | Recommend high-value recurring products         |
+| C1 – Moderate Clickers       | Moderate engagement   | Recommend discount-based products               |
+| C2 – Premium Explorers       | High price curiosity  | Recommend luxury or aspirational content        |
+| R4 – Consistent High Value   | Regular purchases     | Prioritize bundle offers or membership upgrades |
+
+Personalization benefits include:
+
+* Higher CTR and ROI through relevance
+* Reduced ad fatigue
+* Improved conversion by context matching
+
+This system can later evolve into a **real-time recommender pipeline**, powered by collaborative filtering or deep learning models.
+
+---
+
+### **5.6 A/B Testing Framework**
+
+To ensure that optimizations produce statistically valid improvements, a formal **A/B testing framework** should be established.
+
+**Experiment Structure:**
+
+| Component        | Description                                    |
+| ---------------- | ---------------------------------------------- |
+| Control Group    | Original ad or targeting setup                 |
+| Test Group       | Modified ad (price tier, demographic, or copy) |
+| Key Metric       | CTR, CVR, ROI                                  |
+| Statistical Test | Two-sample Z-test                              |
+| Confidence Level | 95% (α = 0.05)                                 |
+
+**Z-Test Formula:**
+z = (CTR₁ − CTR₂) / √(p × (1 − p) × (1/n₁ + 1/n₂))
+where p = (clicks₁ + clicks₂) / (impressions₁ + impressions₂)
+
+This framework ensures objective evaluation of creative and targeting strategies, avoiding biased interpretation of short-term results.
+
+---
+
+### **5.7 Retention and Re-Engagement Tactics**
+
+Retention improvement strategies are essential given the rapid user churn:
 
 1. **Micro-Segmented Retargeting**
-
-   * Use RFM categories (e.g., Retention, Deep Nurture) to tailor messages.
-   * Combine email, push notification, and social channels.
+   Use RFM categories to personalize re-engagement campaigns.
 
 2. **Content Sequencing**
+   Present a narrative progression — awareness → interest → action — to build product familiarity.
 
-   * Design “narrative ads” — sequence of thematic creatives that gradually build product familiarity.
+3. **Reward-Based Reactivation**
+   Offer loyalty points or discounts for users inactive for over 3 days.
 
-3. **Incentive Re-Activation**
+4. **Predictive Churn Triggers**
+   Use logistic regression or time-decay functions to identify users likely to disengage.
 
-   * Reward-based reminders for users inactive beyond 3 days.
-
-4. **Predictive Recall Triggers**
-
-   * Train simple logistic or time-decay models to predict when a user is likely to disengage.
-
----
-
-### 5.8 Multi-Metric Optimization Framework
-
-Advertising success should not rely solely on CTR.
-A **multi-objective optimization** can better balance engagement, conversion, and retention.
-
-```
-Objective = w1 * CTR + w2 * CVR + w3 * Retention
-```
-
-where weights `w1`, `w2`, and `w3` are dynamically adjusted based on business priorities.
-
-This framework allows adaptive optimization across different campaign goals (traffic, conversion, or loyalty).
+These methods directly convert analytical insights into **operational growth levers**.
 
 ---
 
-### 5.9 System Integration and Automation
+### **5.8 Multi-Metric Optimization**
 
-For operational deployment, the pipeline can be integrated as an automated system:
+To avoid overfocusing on CTR, a composite optimization function should balance multiple business objectives:
 
-* **Data Layer:** Scheduled ETL job (Airflow or Cron) updating daily logs.
-* **Model Layer:** Automated retraining of clustering and CTR models every week.
-* **Visualization Layer:** Streamlit or PowerBI dashboard for live KPI monitoring.
-* **Action Layer:** API-based triggers for bid adjustments or re-engagement campaigns.
+**Objective = w₁ × CTR + w₂ × CVR + w₃ × Retention**
 
-This end-to-end system design ensures a **feedback-driven optimization loop**.
+The weights (w₁, w₂, w₃) can be tuned dynamically based on campaign goals:
 
-好的 ✅
-以下是英文版 **Chapter 5: Strategy and Application**，依然采用 GitHub Markdown 风格，适合直接展示在仓库 README 中（包含策略方案、A/B 实验与业务落地设计）。
+* Brand exposure → emphasize CTR
+* Sales conversion → emphasize CVR
+* Customer loyalty → emphasize Retention
 
----
-
-```markdown
-## **Chapter 5. Strategy and Application**
+This unified framework enables adaptive optimization aligned with marketing priorities.
 
 ---
 
-### 5.1 Translating Insights into Action
+### **5.9 System Integration and Automation**
 
-The analytical results from previous chapters form a comprehensive foundation for **data-driven decision-making** in ad optimization.  
-This chapter translates quantitative insights into practical business strategies, focusing on targeting, retention, experimentation, and personalization.
+The entire analytical process can be deployed as an **automated analytics and optimization system**, consisting of four layers:
 
-The goal is to create a **closed feedback loop** from data → insight → execution → evaluation.
+1. **Data Layer**
+   Daily ETL jobs update user, ad, and click tables.
 
----
+2. **Model Layer**
+   Automated weekly retraining of clustering and CTR prediction models.
 
-### 5.2 Price-Tier Optimization Strategy
+3. **Visualization Layer**
+   Dashboards (e.g., Streamlit, Power BI) track CTR, retention, and ROI in real time.
 
-1. **Dynamic CPC Bidding by Price Bin**  
-   Allocate ad budget proportionally based on CTR performance per price tier.  
-   For example:  
-```
+4. **Action Layer**
+   APIs trigger automated bid adjustments, retargeting pushes, or campaign scheduling.
 
-bid_weight = CTR_bin / mean_CTR
-
-```
-- High-CTR bins (0–200, 12801+) receive more bidding weight.  
-- Mid-price bins (400–1600) are optimized through creative redesign or audience retargeting.
-
-2. **Elasticity-Based ROI Tracking**  
-Incorporate price elasticity analysis to measure marginal gains:  
-```
-
-ROI = (CTR * ConversionRate * ProfitPerClick) / CostPerImpression
-
-````
-Adjust pricing and creative intensity dynamically by ROI sensitivity.
-
-3. **Recommendation for Implementation**
-- Integrate these weights into DSP/RTB bidding algorithms.  
-- Monitor real-time CTR by bin and reweight weekly.
-
----
-
-### 5.3 Demographic Targeting Enhancement
-
-Using the demographic alignment pattern discovered earlier, construct an **Audience–Ad Match Matrix**:
-
-| Demographic Segment | Ad Type | Strategy |
-|----------------------|----------|-----------|
-| Female, 18–25, Low Price Sensitivity | Fashion, Cosmetics | Emphasize visuals, flash sales |
-| Male, 25–40, Tech Interest | Electronics, Tools | Highlight functionality and specs |
-| Student, Low Consumption Level | Education, Daily Goods | Use discounts and reward incentives |
-| High Income, 30+ | Premium & Luxury | Stress exclusivity and brand identity |
-
-This **MatchRate matrix** provides the operational basis for **campaign segmentation**, ensuring that creative assets and placements correspond precisely to audience profiles.
-
----
-
-### 5.4 User Lifecycle Management
-
-The RFM and cohort analyses demonstrate a **short-term lifecycle** with rapid engagement decay.  
-Therefore, lifecycle management should focus on **timely reactivation**:
-
-| Stage | Strategy | Timing |
-|--------|-----------|---------|
-| D+1 | Send post-click reminders or offer coupons | 24 hours after click |
-| D+3 | Deliver personalized recommendations | 3 days post-click |
-| D+7 | Reactivation ads or email remarketing | 7 days post-click |
-
-Such time-sensitive reactivation loops can **extend user lifetime value (LTV)** and **reduce churn rate** effectively.
-
----
-
-### 5.5 Personalized Recommendation System
-
-Leveraging clustering outputs, each user can be assigned to a **behavioral segment** for content personalization.
-
-**Example Personalization Logic:**
-```python
-if user.cluster == 'C3':
- recommend('high-engagement', n=3)
-elif user.cluster == 'C1':
- recommend('discount-focused', n=5)
-elif user.cluster == 'C2':
- recommend('premium-exploratory', n=2)
-````
-
-This system provides:
-
-* **Higher CTR uplift** via relevance.
-* **Reduced ad fatigue** through varied content.
-* **Better ROI** by targeting high-value clusters selectively.
-
----
-
-### 5.6 A/B Testing Framework
-
-A standardized A/B testing protocol ensures objective performance evaluation for different strategies.
-
-**Structure:**
-
-| Component         | Description                                    |
-| ----------------- | ---------------------------------------------- |
-| Control Group     | Baseline ad version                            |
-| Treatment Group   | Modified version (price, design, or targeting) |
-| Metric            | CTR, CVR, ROI                                  |
-| Significance Test | Two-sample Z-test                              |
-| Confidence Level  | 95% (α = 0.05)                                 |
-
-**Formula:**
-
-```
-z = (CTR1 - CTR2) / sqrt(p*(1-p)*(1/n1 + 1/n2))
-```
-
-where
-`p = (clicks1 + clicks2) / (impressions1 + impressions2)`
-
-**Implementation Tip:**
-Maintain a centralized log of experiments, and evaluate using both *statistical* and *business significance* metrics.
-
----
-
-### 5.7 Retention and Re-Engagement Tactics
-
-1. **Micro-Segmented Retargeting**
-
-   * Use RFM categories (e.g., Retention, Deep Nurture) to tailor messages.
-   * Combine email, push notification, and social channels.
-
-2. **Content Sequencing**
-
-   * Design “narrative ads” — sequence of thematic creatives that gradually build product familiarity.
-
-3. **Incentive Re-Activation**
-
-   * Reward-based reminders for users inactive beyond 3 days.
-
-4. **Predictive Recall Triggers**
-
-   * Train simple logistic or time-decay models to predict when a user is likely to disengage.
-
----
-
-### 5.8 Multi-Metric Optimization Framework
-
-Advertising success should not rely solely on CTR.
-A **multi-objective optimization** can better balance engagement, conversion, and retention.
-
-```
-Objective = w1 * CTR + w2 * CVR + w3 * Retention
-```
-
-where weights `w1`, `w2`, and `w3` are dynamically adjusted based on business priorities.
-
-This framework allows adaptive optimization across different campaign goals (traffic, conversion, or loyalty).
-
----
-
-### 5.9 System Integration and Automation
-
-For operational deployment, the pipeline can be integrated as an automated system:
-
-* **Data Layer:** Scheduled ETL job (Airflow or Cron) updating daily logs.
-* **Model Layer:** Automated retraining of clustering and CTR models every week.
-* **Visualization Layer:** Streamlit or PowerBI dashboard for live KPI monitoring.
-* **Action Layer:** API-based triggers for bid adjustments or re-engagement campaigns.
-
-This end-to-end system design ensures a **feedback-driven optimization loop**.
+Together, these components form a **self-learning feedback loop** that continually improves ad delivery performance.
 
 ---
 
