@@ -155,6 +155,8 @@
 # **第三章 数据分析与结果（Results and Findings）**
 
 ## **3.1 价格与CTR关系分析**
+<img width="500" height="300" alt="ctr_by_pricebin" src="https://github.com/user-attachments/assets/33d07884-2adc-42a1-a3b3-60a263aa53f9" />
+<img width="500" height="300" alt="usershare_by_pricebin" src="https://github.com/user-attachments/assets/fe2ea8ab-76ce-4a1b-a3cc-ad3749cde9ce" />
 
 广告价格与点击率（CTR）之间的关系是本研究的第一重点。
 通过对近百万条广告记录的分箱统计（`ctr_by_pricebin.png`、`usershare_by_pricebin.png`），结果呈现出明显的**倒U型结构**：
