@@ -175,6 +175,12 @@
 
 ## **3.2 广告位表现差异分析**
 
+<img width="500" height="300" alt="ad_top10_gender" src="https://github.com/user-attachments/assets/b4472bfd-bd5e-4160-abfd-ddd0f4835a96" />
+<img width="500" height="300" alt="ad_top10_age" src="https://github.com/user-attachments/assets/33d9afff-d3e7-4f02-b761-7b74f0cc39be" />
+<img width="500" height="300" alt="ad_top10_level" src="https://github.com/user-attachments/assets/6fe0d43a-a582-425f-9245-a6769abfafb6" />
+<img width="500" height="300" alt="ad_bottom10_gender" src="https://github.com/user-attachments/assets/56494609-31ca-4e7b-ab47-7bb0f2b9e045" />
+<img width="500" height="300" alt="ad_bottom10_age" src="https://github.com/user-attachments/assets/2ffa2c2c-6170-4024-9245-bccb57759a36" />
+<img width="500" height="300" alt="ad_bottom10_level" src="https://github.com/user-attachments/assets/f5f7bb41-72d6-4cf6-9137-1f39bff02dc7" />
 基于广告位（Ad Slot）层级的 Top10 / Bottom10 对比图（`ad_top10_age.png`, `ad_top10_gender.png`, `ad_top10_level.png` 及对应 Bottom 组图）可以得出以下结论：
 
 1. **性别维度差异显著**
@@ -198,6 +204,8 @@
 ---
 
 ## **3.3 点击与未点击行为的价格差异**
+<img width="500" height="300" alt="clicked_price" src="https://github.com/user-attachments/assets/bda78fea-4fbd-4bc7-92a8-d8db401e78c4" />
+<img width="500" height="300" alt="nonclicked_price" src="https://github.com/user-attachments/assets/b59a32cc-d7e4-4fe1-8a97-bcabeae74e58" />
 
 通过 `clicked_price.png` 与 `nonclicked_price.png` 的价格分布对比发现：
 
@@ -241,6 +249,10 @@ RFM 模型用于描述用户的生命周期价值结构（图 `rfm_age.png`, `rf
 ---
 
 ## **3.5 用户聚类分析**
+<img width="500" height="300" alt="rfmcluster_age" src="https://github.com/user-attachments/assets/40eac235-0091-4c50-941c-3d8a75d48edb" />
+<img width="500" height="300" alt="rfmcluster_gender" src="https://github.com/user-attachments/assets/e779544c-71f6-4f93-8f50-9200c5bf5a1f" />
+<img width="500" height="300" alt="cluster_age" src="https://github.com/user-attachments/assets/237a9230-7203-480e-804b-1d08e9cc2044" />
+<img width="500" height="300" alt="cluster_gender" src="https://github.com/user-attachments/assets/7a89581d-73b9-4218-ad0f-daabdfbf9ea3" />
 
 在 `rfmcluster_age.png`, `rfmcluster_gender.png`, `cluster_age.png`, `cluster_gender.png` 的基础上，聚类模型（KMeans, n=5）结果如下：
 
@@ -258,6 +270,7 @@ RFM 模型用于描述用户的生命周期价值结构（图 `rfm_age.png`, `rf
 ---
 
 ## **3.6 用户留存分析**
+<img width="600" height="300" alt="cohort_retention_heatmap" src="https://github.com/user-attachments/assets/22f6fb44-2826-477f-8705-5af362d2c940" />
 
 通过 `cohort_retention_heatmap.png` 可视化得到如下特征：
 
