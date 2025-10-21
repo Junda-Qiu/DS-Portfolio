@@ -176,7 +176,10 @@ User Share (%) = (unique_users_in_bin / total_unique_users) × 100
 Visualizations:
 
 * `ctr_by_pricebin.png`
+<img width="500" height="300" alt="ctr_by_pricebin" src="https://github.com/user-attachments/assets/a3a95d2e-25c8-4c6d-a693-3b4a5e4adb51" />
+
 * `usershare_by_pricebin.png`
+<img width="500" height="300" alt="usershare_by_pricebin" src="https://github.com/user-attachments/assets/e0e847a7-4fb5-443e-b791-ab032b28de51" />
 
 ---
 
@@ -187,7 +190,15 @@ Ads are ranked by impressions and CTR to identify top and bottom performers.
 Visualizations:
 
 * **Top 10 Ads:** `ad_top10_age.png`, `ad_top10_gender.png`, `ad_top10_level.png`
+<img width="500" height="300" alt="ad_top10_age" src="https://github.com/user-attachments/assets/253ed500-c00d-48ec-8bf5-5e4393dc74fd" />
+<img width="500" height="300" alt="ad_top10_level" src="https://github.com/user-attachments/assets/6ae2438f-01ea-41e8-9517-0a6b939e807f" />
+<img width="500" height="300" alt="ad_top10_gender" src="https://github.com/user-attachments/assets/73151af8-83b4-4b06-b26d-03c25bc5b696" />
+
+  
 * **Bottom 10 Ads:** `ad_bottom10_age.png`, `ad_bottom10_gender.png`, `ad_bottom10_level.png`
+<img width="500" height="300" alt="ad_bottom10_age" src="https://github.com/user-attachments/assets/123b0aba-cf24-4494-bc0b-a4f85a146a35" />
+<img width="500" height="300" alt="ad_bottom10_level" src="https://github.com/user-attachments/assets/e29ddd10-3b42-48be-a345-d750ab15f305" />
+<img width="500" height="300" alt="ad_bottom10_gender" src="https://github.com/user-attachments/assets/2c48d82d-de6d-45bc-add7-6f5147ffa8fb" />
 
 **Insights:**
 
@@ -236,12 +247,16 @@ Features: `[shopping_level, click_rate, avg_price]`
 
 * Number of clusters: 5
 * Outputs: `cluster_age.png`, `cluster_gender.png`
+<img width="500" height="300" alt="cluster_gender" src="https://github.com/user-attachments/assets/6ffff8f4-3c38-4923-b14f-773a0f38d54a" />
+<img width="500" height="300" alt="cluster_age" src="https://github.com/user-attachments/assets/8b3cb6f2-6720-4f62-bb6d-d89ff9e3a8cc" />
 
 **(2) RFM-Based Clustering**
 Features: `[recency, frequency, monetary]`
 
 * Number of clusters: 5
 * Outputs: `rfmcluster_age.png`, `rfmcluster_gender.png`
+<img width="500" height="300" alt="rfmcluster_gender" src="https://github.com/user-attachments/assets/09bd7dc1-ee93-4e0f-b7a9-359529b92206" />
+<img width="500" height="300" alt="rfmcluster_age" src="https://github.com/user-attachments/assets/52f50d51-18b7-4469-b7ee-ef51053fb709" />
 
 These clusters reveal user subgroups such as price-sensitive explorers, loyal high-frequency clickers, and passive browsers.
 
@@ -255,6 +270,7 @@ Two retention metrics are analyzed:
 Each user’s first interaction defines a cohort.
 The retention matrix tracks active users over time.
 Visualization: `cohort_retention_heatmap.png`
+<img width="500" height="300" alt="cohort_retention_heatmap" src="https://github.com/user-attachments/assets/395e49de-e091-41fa-aa84-2c2193672b28" />
 
 Results:
 
@@ -284,6 +300,8 @@ Visualizations:
 
 * `price_ctr_equalwidth.png`
 * `price_ctr_quantile.png`
+<img width="500" height="300" alt="price_ctr_equalwidth" src="https://github.com/user-attachments/assets/02d84b60-1dee-469c-829e-5deb81fbceb0" />
+<img width="500" height="300" alt="price_ctr_quantile" src="https://github.com/user-attachments/assets/6b86ea10-209d-4ef5-b612-8cc125dfefd9" />
 
 **Conclusion:** Quantile binning better captures CTR variation under skewed distributions.
 
@@ -316,6 +334,8 @@ CTR and user distribution are summarized through the following visualizations:
 | 3201–6400  | 4.17    | 4.99           |
 | 6401–12800 | 4.38    | 2.86           |
 | 12801+     | 5.13    | 1.23           |
+<img width="500" height="300" alt="ctr_by_pricebin" src="https://github.com/user-attachments/assets/41e95bd0-18ef-476c-9f0a-af937f7a7215" />
+<img width="500" height="300" alt="usershare_by_pricebin" src="https://github.com/user-attachments/assets/a416d6dc-b20f-42d8-aa52-6f91b0c3205b" />
 
 **Findings:**
 
@@ -344,6 +364,8 @@ Supporting figures:
 
 * `clicked_price.png` (average price of clicked items)
 * `nonclicked_price.png` (average price of skipped items)
+<img width="500" height="300" alt="clicked_price" src="https://github.com/user-attachments/assets/15d06954-4391-417a-92d2-2aad74e9041c" />
+<img width="500" height="300" alt="nonclicked_price" src="https://github.com/user-attachments/assets/e757c13b-43b3-442b-858c-e56c6b6ee8a5" />
 
 ---
 
@@ -368,6 +390,8 @@ Visualizations: `rfm_age.png`, `rfm_gender.png`
 | Potential Users    | Regular but low-value                    | 4.06      |
 | Maintain Users     | Consistent, medium-value                 | 1.51      |
 | Re-Engage Users    | Previously active, now inactive          | 1.36      |
+<img width="500" height="300" alt="rfm_gender" src="https://github.com/user-attachments/assets/9aa2d80b-10f8-4df9-8224-836e7a62cc26" />
+<img width="500" height="300" alt="rfm_age" src="https://github.com/user-attachments/assets/56cdbf0b-9979-4653-8e99-c65a90027941" />
 
 **Interpretation:**
 
@@ -397,6 +421,8 @@ Cluster distribution:
 * C2: 2.03%
 * C3: 3.21%
 * C4: 6.63%
+<img width="500" height="300" alt="cluster_gender" src="https://github.com/user-attachments/assets/29d3d3ac-066b-4ef9-988c-dcc5aec1adf3" />
+<img width="500" height="300" alt="cluster_age" src="https://github.com/user-attachments/assets/f797481e-310c-457e-884e-a5fa59ac01b6" />
 
 **Insights:**
 
@@ -418,6 +444,8 @@ Visualizations: `rfmcluster_age.png`, `rfmcluster_gender.png`
 | R2      | 1013.48 | 0.00      | 348.33   | Churned segment              |
 | R3      | 1011.04 | 0.07      | 5712.31  | High spenders, rare activity |
 | R4      | 1009.07 | 2.39      | 564.81   | Consistent active users      |
+<img width="500" height="300" alt="rfmcluster_gender" src="https://github.com/user-attachments/assets/e6c117ee-8102-4482-9004-164820c99e5f" />
+<img width="500" height="300" alt="rfmcluster_age" src="https://github.com/user-attachments/assets/da571b69-7042-453a-8132-93e25cf6498d" />
 
 **Findings:**
 
@@ -440,6 +468,7 @@ Visualized in `cohort_retention_heatmap.png`
 | Day 14+ | ≈0            |
 
 Engagement decays sharply within the first week, validating the **short-cycle interest model**.
+<img width="500" height="300" alt="cohort_retention_heatmap" src="https://github.com/user-attachments/assets/1604e411-356b-4857-8508-367b2873463d" />
 
 **Rolling Retention:**
 7-Day = 2.46%
@@ -459,7 +488,10 @@ Two price segmentation strategies were compared:
 Visualizations:
 
 * `price_ctr_equalwidth.png`
+<img width="500" height="300" alt="price_ctr_equalwidth" src="https://github.com/user-attachments/assets/fd228a69-29c4-40af-b1c0-910a7d6d9267" />
+
 * `price_ctr_quantile.png`
+<img width="500" height="300" alt="price_ctr_quantile" src="https://github.com/user-attachments/assets/86b80761-39f1-4210-aca3-ad8ae2208ecd" />
 
 **Summary:**
 
