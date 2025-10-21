@@ -270,13 +270,14 @@ Two retention metrics are analyzed:
 Each user’s first interaction defines a cohort.
 The retention matrix tracks active users over time.
 Visualization: `cohort_retention_heatmap.png`
-<img width="500" height="300" alt="cohort_retention_heatmap" src="https://github.com/user-attachments/assets/395e49de-e091-41fa-aa84-2c2193672b28" />
 
 Results:
 
 * Day 1 retention: 22.8%
 * Day 7 retention: 2.46%
 * Day 14+ retention: 0%
+
+<img width="500" height="300" alt="cohort_retention_heatmap" src="https://github.com/user-attachments/assets/395e49de-e091-41fa-aa84-2c2193672b28" />
 
 **(2) Rolling Retention**
 
