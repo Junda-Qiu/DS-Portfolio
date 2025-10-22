@@ -1,129 +1,72 @@
----
+# 🚀 Jayden Qiu — Machine Learning Engineer & Data Scientist
 
-# <big>**🚀 Jayden Qiu — Machine Learning Engineer & Data Scientist**</big>
-
-Welcome! I’m **Jayden (Junda) Qiu**, a Machine Learning Engineer passionate about turning data-driven insights into scalable, interpretable products.
+Welcome! I’m **Jayden (Junda) Qiu**, a Machine Learning Engineer passionate about turning data-driven insights into scalable, interpretable products.  
 My work integrates **research-grade deep learning** with **production-level system design**, focusing on NLP, time-series forecasting, recommendation systems, and AI agent infrastructure.
 
-* 💼 **Industry Experience**: GoDaddy (MCP Server, LLM tool orchestration), Google (Ad Analytics & User Segmentation)
-* 🧠 **Technical Expertise**: Transformer-based models, recommendation systems, semantic retrieval, and model deployment
-* ⚙️ **Core Strengths**: End-to-end ML engineering, from data preprocessing to inference optimization
-* 📈 **Focus Areas**: AI Infrastructure · NLP · Forecasting · Human-AI Interaction
+- 💼 **Industry Experience**: GoDaddy (MCP Server, LLM tool orchestration), Google (Ad Analytics & User Segmentation)  
+- 🧠 **Technical Expertise**: Transformer-based models, recommendation systems, semantic retrieval, and model deployment  
+- ⚙️ **Core Strengths**: End-to-end ML engineering, from data preprocessing to inference optimization  
+- 📈 **Focus Areas**: AI Infrastructure · NLP · Forecasting · Human-AI Interaction
 
 ---
 
-## <big>**📬 Let's Connect**</big>
+## 📬 Contact Information
 
-If you’re a recruiter, collaborator, or fellow ML researcher, feel free to explore my projects below or reach out for collaboration ideas.
-
-💌 [Email](mailto:junda.qiu.cq@gmail.com) · 💼 [LinkedIn](www.linkedin.com/in/junda-jayden-qiu-7b4aa5292) · 💻 [GitHub]([https://github.com/JundaQiu](https://github.com/Junda-Qiu/DS-Portfolio/edit/main/README.md))
-
----
-
-| Project                                                                                                  | Domain                        | Key Skills / Stack                       | Data / Code        |
-| -------------------------------------------------------------------------------------------------------- | ----------------------------- | ---------------------------------------- | ------------------ |
-| [**Yahoo Answers Q&A Summarization with FLAN-T5**](#-yahoo-answers-qa-summarization-with-flan-t5)        | NLP · Text Summarization      | Hugging Face · T5 · Tokenization · ROUGE | `yahoo_answers_qa` |
-| [**Semantic Similarity Classification on MRPC**](#-semantic-similarity-classification-on-mrpc-with-bert) | NLP · Sentence Classification | BERT · Trainer API · PyTorch             | GLUE MRPC          |
-| [**Recommendation System Design**](#-recommendation-system-design-advanced-ml-implementation)            | Recommender Systems           | PyTorch · DeepFM · LightGCN · Spark      | Amazon Dataset     |
-| [**Sentiment Analysis for Marketing**](#-sentiment-analysis-for-marketing-nlp)                           | NLP · Marketing Analytics     | DistilBERT · Imbalanced-learn · Sklearn  | Amazon Reviews     |
-| [**Stock Price Prediction**](#-stock-price-prediction-deep-learning)                                     | Time Series Forecasting       | LSTM · GRU · Transformer · Grid Search   | Google Finance     |
+**Email:** junda.qiu.cq@gmail.com  
+**Tel:** (458) 232-0086  
+**GitHub:** [Junda-Qiu](https://github.com/Junda-Qiu)  
+**LinkedIn:** [Junda (Jayden) Qiu](https://www.linkedin.com/in/junda-jayden-qiu-7b4aa5292)  
+**Portfolio:** [Data Science Portfolio README](https://github.com/Junda-Qiu/DS-Portfolio/blob/main/README.md)  
 
 ---
 
-## <big>**💼 Professional Experience**</big>
+## 💼 Professional Experience
 
-### **GoDaddy — Machine Learning Engineer Intern**
+### GoDaddy — *Machine Learning Engineer Intern*  
+📍 Tempe, AZ | **07.2025 – 09.2025**
 
-📍 Tempe, AZ | 07.2025 – 09.2025
+- Designed and deployed **DeepSpin-based semantic keyword expansion pipelines**, containerized with Docker and served via secure HTTPS MCP (Model Context Protocol) architecture.  
+- Built a **production-grade MCP server** exposing unified ML tools (domain search, pricing, discount prediction) to LLMs, improving scalability and interoperability.  
+- Developed an **end-to-end inference pipeline** connecting domain search models with real-time pricing APIs and AWS Athena-based discount prediction.  
+- Created an **intelligent conversational sales agent** that enhanced engagement by **35%** and reduced search time by **2.3 minutes per session**.
 
-> *Built GoDaddy’s MCP Server enabling real-time agent integration for domain search, pricing, and discount prediction.*
+### Google — *Data Scientist Intern (Python, SQL, AI Technology)*  
+📍 Remote | **01.2025 – 03.2025**
 
-* Designed and deployed a **DeepSpin-based semantic keyword expansion pipeline**, containerized with Docker and served through secure HTTPS MCP architecture.
-* Built a **production MCP Server** exposing domain, pricing, and discount tools to LLMs, improving system scalability and orchestration.
-* Developed an **end-to-end ML inference system** connecting domain search models with AWS Athena-based discount prediction, optimizing conversions through historical shopper analysis.
-* Created an **intelligent domain sales agent** integrating availability checks, dynamic pricing, and discount recommendations — improving engagement by **35%** and reducing average search time by **2.3 minutes per session**.
-
----
-
-### **Google — Data Scientist Intern (Python, SQL, AI Technology)**
-
-📍 Remote | 01.2025 – 03.2025
-
-> *Analyzed user and ad performance data to optimize digital marketing and retention strategy.*
-
-* Conducted **user segmentation** via K-Means and RFM modeling, increasing engagement by **10%** through targeted outreach.
-* Analyzed **10,000+ ads** to identify high-performing campaigns, cutting ad spend inefficiency by **15%**.
-* Applied the **AARRR growth model** (Acquisition–Activation–Retention–Revenue–Referral) to evaluate funnel efficiency and inform business strategy.
+- Conducted **user segmentation** with K-Means clustering and RFM modeling, improving engagement by **10%**.  
+- Analyzed **10,000+ ad records**, optimizing cost-per-click and reducing ad inefficiency by **15%**.  
+- Applied the **AARRR growth model** to evaluate conversion funnel stages and enhance retention.
 
 ---
 
-## <big>**📁 Project Highlights**</big>
+## 📂 Selected Projects
 
-### 🧠 **Yahoo Answers Q&A Summarization with FLAN-T5**
-
-Fine-tuned a T5-based summarization model for structured Q&A understanding.
-
-* Implemented tokenization, prefix-based instruction tuning, and ROUGE-based evaluation.
-* Achieved **ROUGE-1 = 0.172**, **ROUGE-2 = 0.031**, **ROUGE-L = 0.136** on validation.
-* Built a deployable inference pipeline for real-time Q&A summarization.
-
----
-
-### 🔗 **Semantic Similarity Classification on MRPC with BERT**
-
-Developed a BERT-based model to determine sentence-pair equivalence on GLUE MRPC.
-
-* Utilized `bert-base-uncased` tokenizer and dynamic padding for efficient batching.
-* Trained using Hugging Face `Trainer` API with reproducible hyperparameters.
-* Reached **Accuracy = 0.8603**, **F1 = 0.9042**.
+| Project | Domain | Stack | Highlight |
+|----------|---------|--------|-----------|
+| [**Yahoo Answers Q&A Summarization with FLAN-T5**](#yahoo-answers-qa-summarization-with-flan-t5) | NLP | T5, Hugging Face, ROUGE | Summarization accuracy improvement |
+| [**Semantic Similarity Classification on MRPC**](#semantic-similarity-classification-on-mrpc-with-bert) | NLP | BERT, PyTorch | 0.86 acc / 0.90 F1 |
+| [**Recommendation System Design**](#recommendation-system-design-advanced-ml-implementation) | Recsys | DeepFM, LightGCN | +17% recall, +11% NDCG |
+| [**Sentiment Analysis for Marketing**](#sentiment-analysis-for-marketing-nlp) | NLP | DistilBERT, Sklearn | +62% F1 for business adoption |
+| [**Stock Price Prediction**](#stock-price-prediction-deep-learning) | Forecasting | LSTM, GRU, Transformer | 91.6% trend accuracy |
 
 ---
 
-### 🎯 **Recommendation System Design (Advanced ML Implementation)**
+## 🧰 Tools & Frameworks
 
-Compared classical and neural recommendation algorithms on Amazon’s dataset.
-
-* Implemented **BPRMF**, **ItemKNN**, **DeepFM**, and **LightGCN** in PyTorch.
-* Automated feature extraction with Pandas + Spark for 255K users/items.
-* Improved recall by **17%** and NDCG by **11%** after tuning.
+`Python` · `PyTorch` · `TensorFlow` · `Transformers` · `Sklearn` · `Spark` · `AWS Athena` · `Docker` · `SQL` · `Matplotlib` · `Pandas`  
+`EDA` · `Time Series` · `NLP` · `Recommendation Systems` · `LLM Tooling (MCP)`
 
 ---
 
-### 💬 **Sentiment Analysis for Marketing (NLP)**
+## 📎 Summary Snapshot
 
-Used deep learning to analyze sentiment trends and product perception.
-
-* Conducted data mining and rebalancing via `imbalanced-learn`.
-* Fine-tuned **DistilBERT** for sentiment classification on Amazon reviews.
-* Achieved **Recall 66%**, **Precision 60%**, **F1 62%**, adopted by marketing team.
-
----
-
-### 📈 **Stock Price Prediction (Deep Learning)**
-
-Built LSTM, GRU, and Transformer models for time-series forecasting.
-
-* Preprocessed with `MinMaxScaler` and visualized results via Matplotlib & MATLAB.
-* Achieved **MSE = 0.00048**, **Trend Accuracy = 91.6%** through hyperparameter optimization.
-* Enhanced interpretability via **attention visualization**, highlighting short-term influence patterns.
+| Category | Focus | Impact |
+|-----------|--------|--------|
+| **ML Infrastructure** | GoDaddy MCP Server | Enabled LLM tool orchestration; improved scalability |
+| **Data Science** | Google Ad Analytics | +10% engagement, -15% ad inefficiency |
+| **Deep Learning** | Stock Forecasting | 91.6% trend accuracy |
+| **NLP Applications** | Summarization / Sentiment | Human-aligned, interpretable results |
 
 ---
 
-## <big>**🛠️ Tools & Techniques**</big>
-
-`Python` · `PyTorch` · `TensorFlow` · `Transformers` · `Sklearn`
-`Spark` · `AWS Athena` · `Docker` · `SQL` · `Matplotlib` · `Pandas`
-`EDA` · `Time Series` · `NLP` · `LLM Tooling (MCP)` · `Recommendation Systems`
-
----
-
-## <big>**📎 Summary Snapshot**</big>
-
-| Category              | Focus                     | Impact                                                        |
-| --------------------- | ------------------------- | ------------------------------------------------------------- |
-| **ML Infrastructure** | GoDaddy MCP Server        | Reduced deployment complexity; enabled LLM tool orchestration |
-| **Data Science**      | Google Ad Analytics       | +10% engagement, -15% ad waste                                |
-| **Deep Learning**     | Stock Forecasting         | 91.6% trend accuracy                                          |
-| **NLP Applications**  | Summarization / Sentiment | Human-aligned, interpretable models                           |
-
----
+*© 2025 Jayden Qiu. All rights reserved.*
