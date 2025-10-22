@@ -8,7 +8,7 @@
 **LinkedIn:** [Junda (Jayden) Qiu](https://www.linkedin.com/in/junda-jayden-qiu-7b4aa5292)
 
 ---
-
+## 💼 Professional Experience
 ### **GoDaddy — Machine Learning Engineer Intern**
 
 *Tempe, AZ · Jul 2025 – Sep 2025*
@@ -19,8 +19,6 @@
 * Developed an **intelligent conversational sales agent**, boosting engagement by **35%** and cutting average search time by **2.3 min/session**.
 
 ---
-
-## 💼 Professional Experience
 
 ### **Google — Data Scientist Intern (Python, SQL, Excel, AI Technology)**
 
