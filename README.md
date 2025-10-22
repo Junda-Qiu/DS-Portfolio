@@ -4,7 +4,7 @@
 
 **Email:** [junda.qiu.cq@gmail.com](mailto:junda.qiu.cq@gmail.com)
 **Tel:** (458) 232-0086
-**GitHub:** [MCP Agent Project Documentation]([https://github.com/Junda-Qiu/MCP_Agent_Project_documentation](https://github.com/Junda-Qiu/DS-Portfolio/blob/main/README.md))
+**GitHub:** [Project Documentation]((https://github.com/Junda-Qiu/DS-Portfolio/blob/main/README.md))
 **LinkedIn:** [Junda (Jayden) Qiu](https://www.linkedin.com/in/junda-jayden-qiu-7b4aa5292)
 
 ---
