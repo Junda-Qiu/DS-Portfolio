@@ -9,20 +9,6 @@
 
 ---
 
-## 🎓 Education
-
-### University of California, San Diego (UCSD) — USA
-
-**M.S. in Machine Learning and Data Science** (09.2023 – 06.2025)
-**GPA:** 3.5 / 4.0
-
-### Oregon State University — USA
-
-**B.S. in Electrical and Computer Engineering & Computer Science** (12.2019 – 06.2023)
-**GPA:** 3.78 / 4.0
-
----
-
 ## 💼 Professional Experience
 
 ### **Google — Data Scientist Intern (Python, SQL, Excel, AI Technology)**
@@ -67,7 +53,6 @@
 | **[Recommendation System Design (Advanced ML Implementation)](https://github.com/Junda-Qiu/DS-Portfolio/blob/main/Recommendation%20System/README.md)**                                     | Recommender Systems               | DeepFM · LightGCN · Spark · PyTorch     | +17% Recall · +11% NDCG                       |
 | **[Sentiment Analysis for Marketing (NLP)](https://github.com/Junda-Qiu/DS-Portfolio/blob/main/Sentiment%20Analysis%20for%20Marketing%20%28NLP%29/README.md)**                             | NLP · Marketing Analytics         | DistilBERT · imbalanced-learn · Sklearn | F1 Score 62%                                  |
 | **[Stock Price Prediction (Deep Learning)](https://github.com/Junda-Qiu/DS-Portfolio/blob/main/Stock%20Price%20Prediction/README.md)**                                                     | Time Series Forecasting           | LSTM · GRU · Transformer                | Trend Accuracy 91.6%                          |
-               |
 
 ---
 
