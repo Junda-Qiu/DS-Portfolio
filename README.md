@@ -1,5 +1,3 @@
----
-
 # Jayden Qiu — Machine Learning Engineer & Data Scientist
 
 ## 📬 Contact Information
