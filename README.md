@@ -9,6 +9,17 @@
 
 ---
 
+### **GoDaddy — Machine Learning Engineer Intern**
+
+*Tempe, AZ · Jul 2025 – Sep 2025*
+
+* Designed and deployed **production ML pipelines** integrating **DeepSpin** for semantic keyword expansion and domain generation, containerized with **Docker** under HTTPS MCP architecture.
+* Built a **Model Context Protocol (MCP)** server enabling **LLM tool orchestration**, exposing domain, pricing, and discount APIs for unified access.
+* Created an **end-to-end inference system** combining real-time pricing APIs with **AWS Athena discount prediction**, optimizing purchase conversion.
+* Developed an **intelligent conversational sales agent**, boosting engagement by **35%** and cutting average search time by **2.3 min/session**.
+
+---
+
 ## 💼 Professional Experience
 
 ### **Google — Data Scientist Intern (Python, SQL, Excel, AI Technology)**
@@ -21,16 +32,6 @@
 
 ---
 
-### **GoDaddy — Machine Learning Engineer Intern**
-
-*Tempe, AZ · Jul 2025 – Sep 2025*
-
-* Designed and deployed **production ML pipelines** integrating **DeepSpin** for semantic keyword expansion and domain generation, containerized with **Docker** under HTTPS MCP architecture.
-* Built a **Model Context Protocol (MCP)** server enabling **LLM tool orchestration**, exposing domain, pricing, and discount APIs for unified access.
-* Created an **end-to-end inference system** combining real-time pricing APIs with **AWS Athena discount prediction**, optimizing purchase conversion.
-* Developed an **intelligent conversational sales agent**, boosting engagement by **35%** and cutting average search time by **2.3 min/session**.
-
----
 
 ### **Tesla — Machine Learning Algorithm Intern (Python, UE5, GitHub, AI Technology)**
 
