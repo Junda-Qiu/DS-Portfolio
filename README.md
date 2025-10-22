@@ -1,72 +1,84 @@
-# 🚀 Jayden Qiu — Machine Learning Engineer & Data Scientist
-
-Welcome! I’m **Jayden (Junda) Qiu**, a Machine Learning Engineer passionate about turning data-driven insights into scalable, interpretable products.  
-My work integrates **research-grade deep learning** with **production-level system design**, focusing on NLP, time-series forecasting, recommendation systems, and AI agent infrastructure.
-
-- 💼 **Industry Experience**: GoDaddy (MCP Server, LLM tool orchestration), Google (Ad Analytics & User Segmentation)  
-- 🧠 **Technical Expertise**: Transformer-based models, recommendation systems, semantic retrieval, and model deployment  
-- ⚙️ **Core Strengths**: End-to-end ML engineering, from data preprocessing to inference optimization  
-- 📈 **Focus Areas**: AI Infrastructure · NLP · Forecasting · Human-AI Interaction
-
 ---
+
+# Jayden Qiu — Machine Learning Engineer & Data Scientist
 
 ## 📬 Contact Information
 
-**Email:** junda.qiu.cq@gmail.com  
-**Tel:** (458) 232-0086  
-**GitHub:** [Junda-Qiu](https://github.com/Junda-Qiu)  
-**LinkedIn:** [Junda (Jayden) Qiu](https://www.linkedin.com/in/junda-jayden-qiu-7b4aa5292)  
-**Portfolio:** [Data Science Portfolio README](https://github.com/Junda-Qiu/DS-Portfolio/blob/main/README.md)  
+**Email:** [junda.qiu.cq@gmail.com](mailto:junda.qiu.cq@gmail.com)
+**Tel:** (458) 232-0086
+**GitHub:** [MCP Agent Project Documentation](https://github.com/Junda-Qiu/MCP_Agent_Project_documentation)
+**LinkedIn:** [Junda (Jayden) Qiu](https://www.linkedin.com/in/junda-jayden-qiu-7b4aa5292)
+
+---
+
+## 🎓 Education
+
+### University of California, San Diego (UCSD) — USA
+
+**M.S. in Machine Learning and Data Science** (09.2023 – 06.2025)
+**GPA:** 3.5 / 4.0
+
+### Oregon State University — USA
+
+**B.S. in Electrical and Computer Engineering & Computer Science** (12.2019 – 06.2023)
+**GPA:** 3.78 / 4.0
 
 ---
 
 ## 💼 Professional Experience
 
-### GoDaddy — *Machine Learning Engineer Intern*  
-📍 Tempe, AZ | **07.2025 – 09.2025**
+### **Google — Data Scientist Intern (Python, SQL, Excel, AI Technology)**
 
-- Designed and deployed **DeepSpin-based semantic keyword expansion pipelines**, containerized with Docker and served via secure HTTPS MCP (Model Context Protocol) architecture.  
-- Built a **production-grade MCP server** exposing unified ML tools (domain search, pricing, discount prediction) to LLMs, improving scalability and interoperability.  
-- Developed an **end-to-end inference pipeline** connecting domain search models with real-time pricing APIs and AWS Athena-based discount prediction.  
-- Created an **intelligent conversational sales agent** that enhanced engagement by **35%** and reduced search time by **2.3 minutes per session**.
+*Remote · Jan 2025 – Mar 2025*
 
-### Google — *Data Scientist Intern (Python, SQL, AI Technology)*  
-📍 Remote | **01.2025 – 03.2025**
-
-- Conducted **user segmentation** with K-Means clustering and RFM modeling, improving engagement by **10%**.  
-- Analyzed **10,000+ ad records**, optimizing cost-per-click and reducing ad inefficiency by **15%**.  
-- Applied the **AARRR growth model** to evaluate conversion funnel stages and enhance retention.
+* Conducted user segmentation via **K-Means clustering** and **RFM modeling**, improving user engagement by **10%**.
+* Analyzed **10,000+ ad records** and optimized ad spend, reducing inefficiency by **15%**.
+* Applied the **AARRR framework** to model acquisition, retention, and revenue behaviors, driving data-driven marketing strategies.
 
 ---
 
-## 📂 Selected Projects
+### **GoDaddy — Machine Learning Engineer Intern**
 
-| Project | Domain | Stack | Highlight |
-|----------|---------|--------|-----------|
-| [**Yahoo Answers Q&A Summarization with FLAN-T5**](#yahoo-answers-qa-summarization-with-flan-t5) | NLP | T5, Hugging Face, ROUGE | Summarization accuracy improvement |
-| [**Semantic Similarity Classification on MRPC**](#semantic-similarity-classification-on-mrpc-with-bert) | NLP | BERT, PyTorch | 0.86 acc / 0.90 F1 |
-| [**Recommendation System Design**](#recommendation-system-design-advanced-ml-implementation) | Recsys | DeepFM, LightGCN | +17% recall, +11% NDCG |
-| [**Sentiment Analysis for Marketing**](#sentiment-analysis-for-marketing-nlp) | NLP | DistilBERT, Sklearn | +62% F1 for business adoption |
-| [**Stock Price Prediction**](#stock-price-prediction-deep-learning) | Forecasting | LSTM, GRU, Transformer | 91.6% trend accuracy |
+*Tempe, AZ · Jul 2025 – Sep 2025*
 
----
-
-## 🧰 Tools & Frameworks
-
-`Python` · `PyTorch` · `TensorFlow` · `Transformers` · `Sklearn` · `Spark` · `AWS Athena` · `Docker` · `SQL` · `Matplotlib` · `Pandas`  
-`EDA` · `Time Series` · `NLP` · `Recommendation Systems` · `LLM Tooling (MCP)`
+* Designed and deployed **production ML pipelines** integrating **DeepSpin** for semantic keyword expansion and domain generation, containerized with **Docker** under HTTPS MCP architecture.
+* Built a **Model Context Protocol (MCP)** server enabling **LLM tool orchestration**, exposing domain, pricing, and discount APIs for unified access.
+* Created an **end-to-end inference system** combining real-time pricing APIs with **AWS Athena discount prediction**, optimizing purchase conversion.
+* Developed an **intelligent conversational sales agent**, boosting engagement by **35%** and cutting average search time by **2.3 min/session**.
 
 ---
 
-## 📎 Summary Snapshot
+### **Tesla — Machine Learning Algorithm Intern (Python, UE5, GitHub, AI Technology)**
 
-| Category | Focus | Impact |
-|-----------|--------|--------|
-| **ML Infrastructure** | GoDaddy MCP Server | Enabled LLM tool orchestration; improved scalability |
-| **Data Science** | Google Ad Analytics | +10% engagement, -15% ad inefficiency |
-| **Deep Learning** | Stock Forecasting | 91.6% trend accuracy |
-| **NLP Applications** | Summarization / Sentiment | Human-aligned, interpretable results |
+*Shanghai, China · Sep 2024 – Dec 2024*
+
+* Enhanced small-object detection using **YOLOX**, **Swin Transformer V2**, **YOLOv8**, **Faster R-CNN**, **Auto-FPN**, and **PFPNet**, improving inference speed by **20%** and cutting training cost by **30%** through mixed precision + distributed training.
+* Utilized **PyTorch**, **TensorFlow**, and **VS Code** for development; implemented version control via Git.
+* Achieved **95% mAP (YOLOv8)** and **92% mAP (Faster R-CNN)** on the **Tsinghua-Tencent 100K dataset**, earning internal approval for deployment.
 
 ---
 
-*© 2025 Jayden Qiu. All rights reserved.*
+## 🚀 Selected Projects
+
+| Project                                                                                                                                                                                    | Domain                            | Key Tech                                | GitHub Link                                   |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------- | --------------------------------------- | --------------------------------------------- |
+| **[MCP Agent Project Documentation](https://github.com/Junda-Qiu/DS-Portfolio/blob/main/MCP_Agent_Project_documentation/README.md)**                                                       | AI Infrastructure                 | MCP Server · LLM Tooling · Docker       | Production LLM Integration                    |
+| **[Ad Google Analytics End-to-End](https://github.com/Junda-Qiu/DS-Portfolio/blob/main/Ad-Google-Analytics-End2end/README.md)**                                                            | Data Science · Business Analytics | SQL · Python · Power BI                 | Funnel Optimization & ROI      
+| **[Yahoo Answers Q&A Summarization with FLAN-T5](https://github.com/Junda-Qiu/DS-Portfolio/blob/main/Yahoo-Answers-Q%26A-Summarization-with-FLAN-T5/README.md)**                           | NLP · Text Summarization          | T5 · Hugging Face · ROUGE               | ROUGE-1 0.172 · ROUGE-2 0.031 · ROUGE-L 0.136 |
+| **[Semantic Similarity Classification on MRPC with BERT](https://github.com/Junda-Qiu/DS-Portfolio/blob/main/Semantic%20Similarity%20Classification%20on%20MRPC%20with%20BERT/README.md)** | NLP · Sentence Classification     | BERT · PyTorch · Trainer API            | Accuracy 0.86 · F1 0.90                       |
+| **[Recommendation System Design (Advanced ML Implementation)](https://github.com/Junda-Qiu/DS-Portfolio/blob/main/Recommendation%20System/README.md)**                                     | Recommender Systems               | DeepFM · LightGCN · Spark · PyTorch     | +17% Recall · +11% NDCG                       |
+| **[Sentiment Analysis for Marketing (NLP)](https://github.com/Junda-Qiu/DS-Portfolio/blob/main/Sentiment%20Analysis%20for%20Marketing%20%28NLP%29/README.md)**                             | NLP · Marketing Analytics         | DistilBERT · imbalanced-learn · Sklearn | F1 Score 62%                                  |
+| **[Stock Price Prediction (Deep Learning)](https://github.com/Junda-Qiu/DS-Portfolio/blob/main/Stock%20Price%20Prediction/README.md)**                                                     | Time Series Forecasting           | LSTM · GRU · Transformer                | Trend Accuracy 91.6%                          |
+               |
+
+---
+
+## 🧠 Technical Skills
+
+**Programming:** Python (NumPy, Pandas, Scikit-learn, TensorFlow, PyTorch, Keras, SciPy, Statsmodels), SQL (PostgreSQL, MySQL, BigQuery), R (tidyverse), Bash, NoSQL (MongoDB)
+**Machine Learning & AI:** Supervised (LR, Tree-based, SVM, GBM), Unsupervised (K-Means, PCA, DBSCAN), Deep Learning (CNN, RNN, LSTM, Transformer), NLP (BERT, GPT, TF-IDF), CV (YOLO, ResNet, U-Net, SAM)
+**Experimentation & Analytics:** A/B Testing (Optimizely), Causal Inference (DiD, PSM, Uplift, SCM, DML), User Segmentation, Statistical Analysis (Hypothesis Testing, Power Analysis)
+**Visualization:** Tableau, Power BI, Seaborn, Plotly, Excel, Looker
+**Cloud & Engineering:** AWS, GCP (Vertex AI), Azure (Databricks), Spark, Airflow, Docker, Kubernetes (K8s), MLflow, MLOps, Git, Jira, Confluence
+
+---
